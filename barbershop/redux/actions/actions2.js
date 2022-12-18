@@ -6,7 +6,7 @@ import { setConfig, tokenCheck } from "./actions";
 import * as Notifications from "expo-notifications";
 import Config from "react-native-config";
 
-export const BASE_URL = Config.BASE_URL_2;
+const BASE_URL = Config.BASE_URL_2;
 
 // fixing appointments
 export const fixAppointment =

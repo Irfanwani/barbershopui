@@ -6,9 +6,9 @@ import FormData from "form-data";
 import mime from "mime";
 import { styles2 } from "../../styles";
 import Config from "react-native-config";
-import { BASE_URL as BASE_URL_2 } from "./actions2";
 
 const BASE_URL = Config.BASE_URL;
+const BASE_URL_2 = Config.BASE_URL_2;
 
 console.log(BASE_URL);
 
