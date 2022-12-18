@@ -7,8 +7,9 @@ import { getAppointments } from "./actions2";
 import { showMessage } from "react-native-flash-message";
 
 import { styles2 } from "../../styles";
+import Config from "react-native-config";
 
-const BASE_URL = "https://barbershopbackend.herokuapp.com/api/payments";
+const BASE_URL = Config.BASE_URL_3;
 
 export const checkout =
 	({ amount, currency, barber, email, apnt_id }) =>

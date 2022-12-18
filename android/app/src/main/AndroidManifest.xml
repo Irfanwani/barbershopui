@@ -21,7 +21,7 @@
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme" android:usesCleartextTraffic="true" android:screenOrientation="portrait">
     <meta-data
      android:name="com.google.android.geo.API_KEY"
-     android:value="AIzaSyDTgob9gpJVgUy03dbqpWfxCb-A3FRfEdI"/>
+     android:value="@string/GOOGLE_MAPS_API_KEY"/>
 
     <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="YOUR-APP-URL-HERE"/>
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="YOUR-APP-SDK-VERSION-HERE"/>

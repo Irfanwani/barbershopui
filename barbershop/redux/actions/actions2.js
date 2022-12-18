@@ -4,8 +4,9 @@ import * as actions from "./types";
 import { setConfig, tokenCheck } from "./actions";
 
 import * as Notifications from "expo-notifications";
+import Config from "react-native-config";
 
-export const BASE_URL = "https://barbershopbackend.herokuapp.com/api/haircut";
+export const BASE_URL = Config.BASE_URL_2;
 
 // fixing appointments
 export const fixAppointment =
@@ -62,7 +63,7 @@ export const fixAppointment =
 					data: { screen: "Appointments" },
 				});
 				axios
-					.post("https://exp.host/--/api/v2/push/send", body, config)
+					.post(Config.PUSH_NOTIFICATION_URL, body, config)
 					.then(() => {})
 					.catch(() => {});
 
