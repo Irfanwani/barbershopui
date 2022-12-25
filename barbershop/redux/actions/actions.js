@@ -10,8 +10,6 @@ import Config from "react-native-config";
 const BASE_URL = Config.BASE_URL;
 const BASE_URL_2 = Config.BASE_URL_2;
 
-console.log(BASE_URL);
-
 // full authentication including email verification and details check
 export const authenticate = () => (dispatch, getState) => {
   const config = setConfig(getState);
