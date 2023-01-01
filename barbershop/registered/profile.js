@@ -41,7 +41,7 @@ const App = () => {
   const [lat, setLat] = useState(parseFloat(coordinates[1]));
   const [lng, setLng] = useState(parseFloat(coordinates[0]));
 
-  const [image, setImage] = useState({ uri: details.image });
+  const [image, setImage] = useState(details.image);
   const [address, setAddress] = useState(details.location);
   const [about, setAbout] = useState(details.about);
   const [contact, setContact] = useState(details.contact);
@@ -80,9 +80,9 @@ const App = () => {
       allowsEditing: true,
     });
 
-    if (!image.cancelled) {
+    if (!image.canceled) {
       ImageRBSheet.current.close();
-      setImage(image);
+      setImage(image.assets[0].uri);
     }
   };
 
@@ -97,14 +97,16 @@ const App = () => {
       allowsEditing: true,
     });
 
-    if (!image.cancelled) {
+    console.log(image);
+
+    if (!image.canceled) {
       ImageRBSheet.current.close();
-      setImage(image);
+      setImage(image.assets[0].uri);
     }
   };
 
   const resetImage = () => {
-    setImage({ uri: details.image });
+    setImage(details.image);
     ImageRBSheet.current.close();
   };
 
@@ -222,7 +224,7 @@ const App = () => {
     };
     dispatch(
       updateDetails(
-        image.uri !== details.image ? image : null,
+        image.assets[0].uri !== details.image ? image : null,
         newDetails,
         details.employee_count
       )
@@ -276,7 +278,7 @@ const App = () => {
       <View style={styles.view7}>
         <Avatar.Image
           style={styles.avatar}
-          source={{ uri: image.uri }}
+          source={{ uri: image }}
           size={150}
         />
         <FAB onPress={openIRBS} icon="camera" style={styles.fab} />

@@ -12,7 +12,6 @@ import {
   ActivityIndicator,
   RadioButton,
   Title,
-  IconButton,
 } from "react-native-paper";
 
 import { connect } from "react-redux";
@@ -105,7 +104,7 @@ class Details extends React.Component {
       allowsEditing: true,
     });
 
-    if (!image.cancelled) {
+    if (!image.canceled) {
       this.setState({ image });
       this.ImageRBSheet.close();
     }
@@ -122,7 +121,7 @@ class Details extends React.Component {
       allowsEditing: true,
     });
 
-    if (!image.cancelled) {
+    if (!image.canceled) {
       this.setState({ image });
       this.ImageRBSheet.close();
     }
@@ -276,7 +275,7 @@ class Details extends React.Component {
               <View>
                 {(image && (
                   <Avatar.Image
-                    source={{ uri: image.uri }}
+                    source={{ uri: image.assets[0].uri }}
                     size={150}
                     style={styles.avatar}
                   />

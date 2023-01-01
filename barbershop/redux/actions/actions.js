@@ -378,9 +378,9 @@ export const details = (image, profile, userType) => (dispatch, getState) => {
 
   image &&
     data.append("image", {
-      uri: image.uri,
-      type: mime.getType(image.uri),
-      name: image.uri.split("/").pop(),
+      uri: image.assets[0].uri,
+      type: mime.getType(image.assets[0].uri),
+      name: image.assets[0].uri.split("/").pop(),
     });
 
   Object.keys(profile).forEach((key) => {
@@ -461,9 +461,9 @@ export const updateDetails =
 
     image &&
       data.append("image", {
-        uri: image.uri,
-        type: mime.getType(image.uri),
-        name: image.uri.split("/").pop(),
+        uri: image.assets[0].uri,
+        type: mime.getType(image.assets[0].uri),
+        name: image.assets[0].uri.split("/").pop(),
       });
 
     Object.keys(newDetails).forEach((key) => {
