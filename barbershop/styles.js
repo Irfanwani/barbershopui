@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
 
   vstyle10: { paddingBottom: 50, paddingTop: 30 },
 
-  bstyle2: { marginBottom: 40, marginTop: 10, alignSelf: "center" },
+  bstyle2: {marginTop: 10, alignSelf: "center" },
 
   bstyle3: { marginRight: 3 },
 
@@ -458,7 +458,7 @@ export const styles2 = StyleSheet.create({
 
   flashstyle2: { marginHorizontal: 30, marginBottom: 10, borderRadius: 10 },
 
-  footerstyle: { paddingBottom: 50 },
+  footerstyle: { paddingBottom: 10 },
 
   vstyle: {
     flexDirection: "row",

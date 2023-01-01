@@ -79,10 +79,9 @@ const RenderItemComponent = forwardRef(({ item, index, callback }, ref) => {
             value={editable ? cost : null}
             onChangeText={getCost}
             keyboardType="numeric"
-            style={styles2.tistyle}
+            style={editable ? styles2.tistyle : {width: 0}}
             placeholder="Price"
             left={<TextInput.Icon name="currency-inr" disabled={true} />}
-            editable={editable}
             onBlur={done}
             error={!cost && editable}
           />
