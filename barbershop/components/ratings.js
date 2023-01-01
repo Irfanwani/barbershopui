@@ -76,7 +76,7 @@ const Ratings = (props) => {
 				maxLength={1000}
 				numberOfLines={5}
 				placeholder="Comments Here..."
-				style={[styles.view7, { maxHeight: 300 }]}
+				style={styles.ratinginput}
 			/>
 
 			<Button

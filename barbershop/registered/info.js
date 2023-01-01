@@ -145,7 +145,6 @@ class Info extends React.PureComponent {
   };
 
   callback3 = (selectedServices) => {
-    console.log(selectedServices);
     let ss = [];
     let total = 0;
     selectedServices.forEach((item) => {

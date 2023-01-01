@@ -97,8 +97,6 @@ const App = () => {
       allowsEditing: true,
     });
 
-    console.log(image);
-
     if (!image.canceled) {
       ImageRBSheet.current.close();
       setImage(image.assets[0].uri);

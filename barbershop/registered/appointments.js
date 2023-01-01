@@ -125,70 +125,69 @@ const Appointments = () => {
     );
   };
 
-  const renderAppointment = ({ item }) => (
-    <View animation="bounceIn" useNativeDriver>
-      <Surface style={styles.sustyle}>
-        <Title>{item.user == username ? item.barber : item.user}</Title>
-        <HelperText>{item.datetime}</HelperText>
-        <Text>Services Selected</Text>
-        {item.services.split("|").map((service, index) => (
-          <HelperText key={index}>{service}</HelperText>
-        ))}
-        <View style={styles.vstyle11}>
-          <Title style={styles.tistyle}>₹{item.totalcost}</Title>
-          {item.user == username &&
-            (!item.paid ? (
-              <Button
-                onPress={() => {
-                  dispatch(
-                    checkout({
-                      amount: item.totalcost,
-                      currency: "INR",
-                      barber: item.barber,
-                      email: email,
-                      apnt_id: item.id,
-                    })
-                  );
-                }}
-                mode="contained"
-                color="teal"
-              >
-                PAY
+  const renderAppointment = ({ item }) => {
+    const chOut = () => {
+      dispatch(
+        checkout({
+          amount: item.totalcost,
+          currency: "INR",
+          barber: item.barber,
+          email: email,
+          apnt_id: item.id,
+        })
+      );
+    };
+    return (
+      <View animation="bounceIn" useNativeDriver>
+        <Surface style={styles.sustyle}>
+          <Title>{item.user == username ? item.barber : item.user}</Title>
+          <HelperText>{item.datetime}</HelperText>
+          <Text>Services Selected</Text>
+          {item.services.split("|").map((service, index) => (
+            <HelperText key={index}>{service}</HelperText>
+          ))}
+          <View style={styles.vstyle11}>
+            <Title style={styles.tistyle}>₹{item.totalcost}</Title>
+            {item.user == username &&
+              (!item.paid ? (
+                <Button onPress={chOut} mode="contained" color="teal">
+                  PAY
+                </Button>
+              ) : null)}
+
+            {item.paid && (
+              <Button color="grey" icon="check" compact>
+                PAID
               </Button>
-            ) : null)}
-
-          {item.paid && (
-            <Button color="grey" icon="check" compact>
-              PAID
-            </Button>
-          )}
-        </View>
-        <View style={styles.vstyle12}>
-          <Divider />
-          <Text style={styles.tstyle7}>Booking ID: #{item.bookingID}</Text>
-        </View>
-
-        {item.user == username && item.paid && (
-          <View style={styles.vstyle13}>
-            <IconButton
-              icon="check-bold"
-              color={Colors.green600}
-              onPress={() => showComp(item.id)}
-            />
-
-            <IconButton
-              icon="delete"
-              color={Colors.red600}
-              onPress={() => showDel(item.id)}
-            />
+            )}
           </View>
-        )}
-      </Surface>
+          <View style={styles.vstyle12}>
+            <Divider />
+            <Text style={styles.tstyle7}>Booking ID: #{item.bookingID}</Text>
+          </View>
 
-      <ActionDialogComp id={item.id} barber={item.barber} />
-      <ActionDialogDel id={item.id} />
-    </View>
-  );
+          {item.user == username && item.paid && (
+            <View style={styles.vstyle13}>
+              <IconButton
+                icon="check-bold"
+                color={Colors.green600}
+                onPress={() => showComp(item.id)}
+              />
+
+              <IconButton
+                icon="delete"
+                color={Colors.red600}
+                onPress={() => showDel(item.id)}
+              />
+            </View>
+          )}
+        </Surface>
+
+        <ActionDialogComp id={item.id} barber={item.barber} />
+        <ActionDialogDel id={item.id} />
+      </View>
+    );
+  };
 
   const ListEmptyComponent = () => {
     return <Text style={styles.tstyle8}>No appointment fixed!</Text>;

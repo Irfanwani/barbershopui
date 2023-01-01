@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   },
   avatar: {
     backgroundColor: "grey",
-    alignSelf: "center",
     marginVertical: 10,
     borderColor: "#6b6b47",
     borderWidth: 2,
@@ -42,8 +41,8 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    right: 90,
     bottom: 0,
+    right: 0,
   },
 
   fab2: {
@@ -288,7 +287,7 @@ const styles = StyleSheet.create({
 
   vstyle10: { paddingBottom: 50, paddingTop: 30 },
 
-  bstyle2: {marginTop: 10, alignSelf: "center" },
+  bstyle2: { marginTop: 10, alignSelf: "center" },
 
   bstyle3: { marginRight: 3 },
 
@@ -299,7 +298,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height / 3.5,
   },
 
-  vstyle11: { position: "absolute", top: 5, right: 5 },
+  vstyle11: { position: "absolute", top: 5, right: 5, alignItems: "center" },
 
   tistyle: { marginBottom: 3 },
 
@@ -422,7 +421,7 @@ const styles = StyleSheet.create({
 
   bstyle6: { marginTop: 5, alignSelf: "center" },
 
-  view7: { marginBottom: 20 },
+  view7: { marginBottom: 20, alignSelf: "center" },
 
   ctstyle: { color: "cyan" },
 
@@ -437,6 +436,7 @@ const styles = StyleSheet.create({
   bstyle7: { alignSelf: "flex-start" },
 
   view9: { position: "absolute", bottom: 5, width: "100%" },
+  ratinginput: { maxHeight: 300, marginBottom: 10 },
 });
 
 export default styles;
