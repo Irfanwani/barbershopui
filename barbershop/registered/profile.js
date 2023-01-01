@@ -222,7 +222,7 @@ const App = () => {
     };
     dispatch(
       updateDetails(
-        image.assets[0].uri !== details.image ? image : null,
+        image !== details.image ? image : null,
         newDetails,
         details.employee_count
       )
@@ -389,7 +389,6 @@ const App = () => {
           onPress={closeMRBS}
           color="white"
           icon="check"
-          label="Done"
           style={styles.fstyle6}
         />
       </RBSheet>
