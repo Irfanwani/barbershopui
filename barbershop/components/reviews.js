@@ -84,6 +84,7 @@ const Reviews = (props) => {
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
           ListEmptyComponent={<Text style={styles.tstyle10}>No Reviews!</Text>}
+          showsVerticalScrollIndicator={false}
         />
       </Animatable.View>
     );

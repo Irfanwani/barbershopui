@@ -192,7 +192,7 @@ export const HeaderComponent = memo((props) => {
   };
 
   return (
-    <ScrollView horizontal>
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <Button
         icon="content-cut"
         color={Colors.teal500}

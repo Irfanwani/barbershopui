@@ -246,7 +246,11 @@ class Details extends React.Component {
 
     const { error } = this.props;
     return (
-      <ScrollView style={styles.sstyle} keyboardShouldPersistTaps="always">
+      <ScrollView
+        style={styles.sstyle}
+        keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}
+      >
         <Animatable.View
           useNativeDriver={true}
           animation="bounceIn"

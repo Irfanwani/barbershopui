@@ -49,6 +49,7 @@ class PasswordReset extends React.Component {
         contentContainerStyle={styles.sstyle1}
         style={styles.sstyle}
         keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}
       >
         <Animatable.View animation="bounceIn" useNativeDriver={true}>
           <Card style={styles.cstyle2} elevation={0}>

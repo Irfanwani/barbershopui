@@ -143,6 +143,7 @@ export const MultiSelect = (props) => {
           keyExtractor={(item) => data.indexOf(item).toString()}
           ItemSeparatorComponent={itemSepComp}
           ListFooterComponent={<View style={styles2.divider}></View>}
+          showsVerticalScrollIndicator={false}
         />
 
         <Button

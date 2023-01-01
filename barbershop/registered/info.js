@@ -255,7 +255,10 @@ class Info extends React.PureComponent {
               {about && (
                 <View>
                   <Title>Bio</Title>
-                  <ScrollView style={styles.sstyle2}>
+                  <ScrollView
+                    style={styles.sstyle2}
+                    showsVerticalScrollIndicator={false}
+                  >
                     <Text style={styles.text2}>{about}</Text>
                   </ScrollView>
                 </View>
@@ -432,6 +435,7 @@ class Info extends React.PureComponent {
                       <Title>Taken Spots</Title>
 
                       <FlatList
+                        showsVerticalScrollIndicator={false}
                         style={styles.flstyle}
                         data={error.takendates}
                         renderItem={this.showItem}

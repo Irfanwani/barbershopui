@@ -48,7 +48,11 @@ class Login extends React.Component {
     const { username, password, hidePassword } = this.state;
     const { error } = this.props;
     return (
-      <ScrollView keyboardShouldPersistTaps="always" style={styles.sstyle}>
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        style={styles.sstyle}
+        showsVerticalScrollIndicator={false}
+      >
         <Animatable.View
           useNativeDriver={true}
           animation="bounceIn"

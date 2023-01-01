@@ -35,6 +35,7 @@ class VerifyEmail extends React.Component {
         style={styles.sstyle}
         contentContainerStyle={styles.sstyle1}
         keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}
       >
         <Animatable.View
           useNativeDriver={true}
