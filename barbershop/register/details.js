@@ -9,7 +9,6 @@ import {
   Card,
   FAB,
   Colors,
-  ActivityIndicator,
   RadioButton,
   Title,
 } from "react-native-paper";
@@ -272,7 +271,7 @@ class Details extends React.Component {
                 )}
               />
 
-              <View>
+              <View style={styles.view7}>
                 {(image && (
                   <Avatar.Image
                     source={{ uri: image.assets[0].uri }}
@@ -339,27 +338,22 @@ class Details extends React.Component {
                     alignSelf: "flex-end",
                   }}
                 ></View>
-                <View>
-                  <TextInput
-                    mode="outlined"
-                    value={location}
-                    onChangeText={this.changeLocation}
-                    label="Address details"
-                    left={<TextInput.Icon name="map-marker" />}
-                    right={
-                      <TextInput.Icon
-                        name={animating ? "" : "crosshairs-gps"}
-                        onPress={this.getLocationAsync}
-                      />
-                    }
-                    onBlur={this.geoCodeAsync}
-                    error={error ? (error.location ? true : false) : false}
-                  />
-
-                  <ActivityIndicator
-                    style={animating ? styles.astyleA : styles.astyleD}
-                  />
-                </View>
+                <TextInput
+                  mode="outlined"
+                  value={location}
+                  onChangeText={this.changeLocation}
+                  label="Address details"
+                  left={<TextInput.Icon name="map-marker" />}
+                  right={
+                    <TextInput.Icon
+                      color={animating ? "grey" : "black"}
+                      name={animating ? "dots-horizontal" : "crosshairs-gps"}
+                      onPress={!animating ? this.getLocationAsync : null}
+                    />
+                  }
+                  onBlur={this.geoCodeAsync}
+                  error={error ? (error.location ? true : false) : false}
+                />
               </View>
               <View style={styles.vstyle2}>
                 <Text style={styles.error}>
@@ -405,6 +399,7 @@ class Details extends React.Component {
                     }}
                   />
                 </MapView>
+
                 <FAB
                   onPress={() =>
                     this.setState((prevState) => ({
@@ -420,7 +415,6 @@ class Details extends React.Component {
                   onPress={() => this.MapRBSheet.close()}
                   color="white"
                   icon="check"
-                  label="Done"
                   style={styles.fstyle6}
                 />
               </RBSheet>

@@ -188,13 +188,13 @@ const styles = StyleSheet.create({
   fstyle5: {
     position: "absolute",
     right: 20,
-    bottom: 20,
+    bottom: 100,
     backgroundColor: Colors.blueGrey800,
   },
   fstyle6: {
     position: "absolute",
-    bottom: 20,
-    alignSelf: "center",
+    bottom: 30,
+    right: 20,
     backgroundColor: Colors.green600,
   },
 
@@ -204,9 +204,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: "center",
   },
-
-  astyleA: { position: "absolute", right: 13, top: 18, zIndex: 1 },
-  astyleD: { display: "none" },
 
   vstyle2: {
     flexDirection: "row",
