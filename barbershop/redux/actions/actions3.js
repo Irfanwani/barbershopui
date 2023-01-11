@@ -14,9 +14,9 @@ import { setConfig, tokenCheck } from "./actions";
 import { showMessage } from "react-native-flash-message";
 
 import { styles2 } from "../../styles";
-import Config from "react-native-config";
+import Constants from "expo-constants";
 
-const BASE_URL = Config.BASE_URL;
+const BASE_URL = Constants.manifest.extra.BASE_URL;
 
 export const addBankDetails = (data) => (dispatch, getState) => {
   dispatch({

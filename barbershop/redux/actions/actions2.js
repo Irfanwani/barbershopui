@@ -4,204 +4,206 @@ import * as actions from "./types";
 import { setConfig, tokenCheck } from "./actions";
 
 import * as Notifications from "expo-notifications";
-import Config from "react-native-config";
+import Constants from "expo-constants";
 
-const BASE_URL = Config.BASE_URL_2;
+const BASE_URL = Constants.manifest.extra.BASE_URL_2;
+
+const Notification_url = Constants.manifest.extra.PUSH_NOTIFICATION_URL;
 
 // fixing appointments
 export const fixAppointment =
-	({ reg_username, barber, datetime, services, totalcost, seeAppointments }) =>
-	(dispatch, getState) => {
-		dispatch({
-			type: actions.LOADING,
-		});
+  ({ reg_username, barber, datetime, services, totalcost, seeAppointments }) =>
+  (dispatch, getState) => {
+    dispatch({
+      type: actions.LOADING,
+    });
 
-		const config = setConfig(getState);
+    const config = setConfig(getState);
 
-		const currentdatetime = new Date()
-			.toString()
-			.split(" ")
-			.slice(0, 5)
-			.join(" ")
-			.split(":")
-			.slice(0, 2)
-			.join(":");
+    const currentdatetime = new Date()
+      .toString()
+      .split(" ")
+      .slice(0, 5)
+      .join(" ")
+      .split(":")
+      .slice(0, 2)
+      .join(":");
 
-		const body = JSON.stringify({
-			barber,
-			currentdatetime,
-			datetime,
-			services,
-			totalcost,
-		});
-		axios
-			.post(BASE_URL + "/appointments", body, config)
-			.then((res) => {
-				showMessage({
-					message: res.data.message,
-					type: "success",
-					icon: "success",
-				});
-				dispatch({
-					type: actions.GET_ERRORS,
-				});
+    const body = JSON.stringify({
+      barber,
+      currentdatetime,
+      datetime,
+      services,
+      totalcost,
+    });
+    axios
+      .post(BASE_URL + "/appointments", body, config)
+      .then((res) => {
+        showMessage({
+          message: res.data.message,
+          type: "success",
+          icon: "success",
+        });
+        dispatch({
+          type: actions.GET_ERRORS,
+        });
 
-				const config = {
-					headers: {
-						Accept: "application/json",
-						"Accept-encoding": "gzip, deflate",
-						"Content-Type": "application/json",
-					},
-				};
+        const config = {
+          headers: {
+            Accept: "application/json",
+            "Accept-encoding": "gzip, deflate",
+            "Content-Type": "application/json",
+          },
+        };
 
-				const body = JSON.stringify({
-					to: res.data.tokenlist,
-					title: "New Appointment Fixed!",
-					body: `${reg_username} fixed an appointment with you!`,
-					sound: "default",
-					priority: "high",
-					data: { screen: "Appointments" },
-				});
-				axios
-					.post(Config.PUSH_NOTIFICATION_URL, body, config)
-					.then(() => {})
-					.catch(() => {});
+        const body = JSON.stringify({
+          to: res.data.tokenlist,
+          title: "New Appointment Fixed!",
+          body: `${reg_username} fixed an appointment with you!`,
+          sound: "default",
+          priority: "high",
+          data: { screen: "Appointments" },
+        });
+        axios
+          .post(Notification_url, body, config)
+          .then(() => {})
+          .catch(() => {});
 
-				seeAppointments();
+        seeAppointments();
 
-				(async () => {
-					const trigger = new Date(datetime);
-					trigger.setMinutes(trigger.getMinutes() - 15);
-					await Notifications.scheduleNotificationAsync({
-						content: {
-							title: `Appointment alert!`,
-							body: `You have an appointment with ${barber} after 15 Minutes`,
-							data: { screen: "Appointments" },
-						},
-						trigger,
-					});
-				})();
-			})
-			.catch((err) => {
-				let check = tokenCheck(err, actions.FIX_FAIL);
-				dispatch(check);
-			});
-	};
+        (async () => {
+          const trigger = new Date(datetime);
+          trigger.setMinutes(trigger.getMinutes() - 15);
+          await Notifications.scheduleNotificationAsync({
+            content: {
+              title: `Appointment alert!`,
+              body: `You have an appointment with ${barber} after 15 Minutes`,
+              data: { screen: "Appointments" },
+            },
+            trigger,
+          });
+        })();
+      })
+      .catch((err) => {
+        let check = tokenCheck(err, actions.FIX_FAIL);
+        dispatch(check);
+      });
+  };
 
 // Getting appointments
 export const getAppointments = () => (dispatch, getState) => {
-	dispatch({
-		type: actions.FETCHING,
-	});
-	const config = setConfig(getState);
+  dispatch({
+    type: actions.FETCHING,
+  });
+  const config = setConfig(getState);
 
-	axios
-		.get(BASE_URL + "/appointments", config)
-		.then((res) => {
-			dispatch({
-				type: actions.GET_APPOINTMENTS,
-				payload: res.data,
-			});
-		})
-		.catch((err) => {
-			let check = tokenCheck(err, actions.GET_APPOINTMENTS_FAIL);
-			dispatch(check);
-		});
+  axios
+    .get(BASE_URL + "/appointments", config)
+    .then((res) => {
+      dispatch({
+        type: actions.GET_APPOINTMENTS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      let check = tokenCheck(err, actions.GET_APPOINTMENTS_FAIL);
+      dispatch(check);
+    });
 };
 
 // Completing/deleting appointment
 export const removeAppointment =
-	(type, id, refreshPage) => (dispatch, getState) => {
-		dispatch({
-			type: actions.LOADING,
-		});
+  (type, id, refreshPage) => (dispatch, getState) => {
+    dispatch({
+      type: actions.LOADING,
+    });
 
-		const config = setConfig(getState);
+    const config = setConfig(getState);
 
-		axios
-			.delete(`${BASE_URL}/cancelappointment/${id}`, config)
-			.then(() => {
-				refreshPage();
-				showMessage({
-					message: `Appointment ${type} successfully`,
-					type: "success",
-					icon: "success",
-				});
-			})
-			.catch((err) => {
-				let check = tokenCheck(err, actions.GET_ERRORS);
-				dispatch(check);
-			});
-	};
+    axios
+      .delete(`${BASE_URL}/cancelappointment/${id}`, config)
+      .then(() => {
+        refreshPage();
+        showMessage({
+          message: `Appointment ${type} successfully`,
+          type: "success",
+          icon: "success",
+        });
+      })
+      .catch((err) => {
+        let check = tokenCheck(err, actions.GET_ERRORS);
+        dispatch(check);
+      });
+  };
 
 // Clearing the errors
 export const removeErrors = () => ({
-	type: actions.GET_ERRORS,
+  type: actions.GET_ERRORS,
 });
 
 // add a rating and review
 export const addReview =
-	(barber, ratings, comments) => (dispatch, getState) => {
-		const config = setConfig(getState);
+  (barber, ratings, comments) => (dispatch, getState) => {
+    const config = setConfig(getState);
 
-		const body = JSON.stringify({ barber, ratings, comments });
+    const body = JSON.stringify({ barber, ratings, comments });
 
-		axios
-			.post(BASE_URL + `/reviews`, body, config)
-			.then(() => {})
-			.catch((err) => {
-				let check = tokenCheck(err, actions.GET_ERRORS);
-				dispatch(check);
-			});
-	};
+    axios
+      .post(BASE_URL + `/reviews`, body, config)
+      .then(() => {})
+      .catch((err) => {
+        let check = tokenCheck(err, actions.GET_ERRORS);
+        dispatch(check);
+      });
+  };
 
 // get reviews of a barber
 export const getReviews = (id) => (dispatch, getState) => {
-	dispatch({
-		type: actions.LOADING,
-	});
-	const config = setConfig(getState);
+  dispatch({
+    type: actions.LOADING,
+  });
+  const config = setConfig(getState);
 
-	axios
-		.get(BASE_URL + `/reviews?barber_id=${id}`, config)
-		.then((res) => {
-			dispatch({
-				type: actions.GET_REVIEWS,
-				payload: res.data,
-			});
-		})
-		.catch((err) => {
-			let check = tokenCheck(err, actions.GET_ERRORS);
-			dispatch(check);
-		});
+  axios
+    .get(BASE_URL + `/reviews?barber_id=${id}`, config)
+    .then((res) => {
+      dispatch({
+        type: actions.GET_REVIEWS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      let check = tokenCheck(err, actions.GET_ERRORS);
+      dispatch(check);
+    });
 };
 
 // delete review
 export const delReview = (id, callback) => (dispatch, getState) => {
-	dispatch({
-		type: actions.LOADING,
-	});
+  dispatch({
+    type: actions.LOADING,
+  });
 
-	const config = setConfig(getState);
+  const config = setConfig(getState);
 
-	axios
-		.delete(BASE_URL + "/reviews", {
-			data: { id },
-			...config,
-		})
-		.then(() => {
-			dispatch({
-				type: actions.GET_ERRORS,
-			});
-			showMessage({
-				message: "Comment removed",
-				type: "info",
-				icon: "info",
-			});
-			callback();
-		})
-		.catch((err) => {
-			let check = tokenCheck(err, actions.GET_ERRORS);
-			dispatch(check);
-		});
+  axios
+    .delete(BASE_URL + "/reviews", {
+      data: { id },
+      ...config,
+    })
+    .then(() => {
+      dispatch({
+        type: actions.GET_ERRORS,
+      });
+      showMessage({
+        message: "Comment removed",
+        type: "info",
+        icon: "info",
+      });
+      callback();
+    })
+    .catch((err) => {
+      let check = tokenCheck(err, actions.GET_ERRORS);
+      dispatch(check);
+    });
 };

@@ -7,9 +7,9 @@ import { getAppointments } from "./actions2";
 import { showMessage } from "react-native-flash-message";
 
 import { styles2 } from "../../styles";
-import Config from "react-native-config";
+import Constants from 'expo-constants';
 
-const BASE_URL = Config.BASE_URL_3;
+const BASE_URL = Constants.manifest.extra.BASE_URL_3;
 
 export const checkout =
 	({ amount, currency, barber, email, apnt_id }) =>

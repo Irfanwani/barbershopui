@@ -1,13 +1,4 @@
 apply plugin: "com.android.application"
-apply plugin: 'com.google.gms.google-services'
-
-project.ext.envConfigFiles = [
-    debug: ".env",
-    release: ".env"
-]
-
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-
 
 import com.android.build.OutputFile
 

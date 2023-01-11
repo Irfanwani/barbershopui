@@ -5,10 +5,10 @@ import axios from "axios";
 import FormData from "form-data";
 import mime from "mime";
 import { styles2 } from "../../styles";
-import Config from "react-native-config";
+import Constants from "expo-constants";
 
-const BASE_URL = Config.BASE_URL;
-const BASE_URL_2 = Config.BASE_URL_2;
+const BASE_URL = Constants.manifest.extra.BASE_URL;
+const BASE_URL_2 = Constants.manifest.extra.BASE_URL_2;
 
 // full authentication including email verification and details check
 export const authenticate = () => (dispatch, getState) => {
