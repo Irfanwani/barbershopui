@@ -7,8 +7,8 @@ import mime from "mime";
 import { styles2 } from "../../styles";
 import Constants from "expo-constants";
 
-const BASE_URL = Constants.manifest.extra.BASE_URL;
-const BASE_URL_2 = Constants.manifest.extra.BASE_URL_2;
+const BASE_URL = Constants.expoConfig.extra.BASE_URL;
+const BASE_URL_2 = Constants.expoConfig.extra.BASE_URL_2;
 
 // full authentication including email verification and details check
 export const authenticate = () => (dispatch, getState) => {

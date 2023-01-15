@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Constants from "expo-constants";
 
-const BASE_URL = Constants.manifest.extra.BASE_URL_2;
+const BASE_URL = Constants.expoConfig.extra.BASE_URL_2;
 
 export const notification_manager = async (id, authToken) => {
   let { status } = await Notifications.requestPermissionsAsync();

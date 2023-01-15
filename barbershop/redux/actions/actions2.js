@@ -6,9 +6,9 @@ import { setConfig, tokenCheck } from "./actions";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 
-const BASE_URL = Constants.manifest.extra.BASE_URL_2;
+const BASE_URL = Constants.expoConfig.extra.BASE_URL_2;
 
-const Notification_url = Constants.manifest.extra.PUSH_NOTIFICATION_URL;
+const Notification_url = Constants.expoConfig.extra.PUSH_NOTIFICATION_URL;
 
 // fixing appointments
 export const fixAppointment =
