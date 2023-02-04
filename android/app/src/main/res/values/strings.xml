@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Barbershop</string>
+    <string name="GOOGLE_MAPS_API_KEY">AIzaSyCXqRaZ045_eLUUI0HrFaUBZUSDaNHeaVA</string>
 </resources>
