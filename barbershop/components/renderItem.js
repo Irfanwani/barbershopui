@@ -38,6 +38,7 @@ const RenderItemComponent = forwardRef(({ item, index, callback }, ref) => {
       ref.current[index].focus();
     } else {
       ref.current[index].blur();
+      setSubmit((prev) => !prev);
     }
   }, [editable]);
 
@@ -63,9 +64,6 @@ const RenderItemComponent = forwardRef(({ item, index, callback }, ref) => {
 
   const checkBoxAlter = (isChecked) => {
     setEditable(isChecked);
-    if (!isChecked) {
-      setSubmit((prev) => !prev);
-    }
   };
 
   return (
@@ -79,7 +77,7 @@ const RenderItemComponent = forwardRef(({ item, index, callback }, ref) => {
             value={editable ? cost : null}
             onChangeText={getCost}
             keyboardType="numeric"
-            style={editable ? styles2.tistyle : {width: 0}}
+            style={editable ? styles2.tistyle : { width: 0 }}
             placeholder="Price"
             left={<TextInput.Icon name="currency-inr" disabled={true} />}
             onBlur={done}

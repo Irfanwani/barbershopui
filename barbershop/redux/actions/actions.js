@@ -570,6 +570,7 @@ export const setConfig = (getState) => {
 
 // check for invalid tokens
 export const tokenCheck = (err, type) => {
+  console.log(err, 'ERROR')
   try {
     if (parseInt(err.response.status) == 401) {
       showMessage({

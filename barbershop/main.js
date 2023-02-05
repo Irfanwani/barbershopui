@@ -128,7 +128,7 @@ const DrawerScreens = (props) => {
         drawerActiveTintColor: headertextcolor,
         headerStyle: { backgroundColor: theme.colors.bgcolor },
         headerTintColor: headertextcolor,
-        swipeEdgeWidth: width,
+        swipeEdgeWidth: width / 4,
       }}
       drawerContent={(props) => <CustomDrawer {...props} />}
       useLegacyImplementation={true}
