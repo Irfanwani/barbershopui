@@ -128,7 +128,7 @@ const AddServices = () => {
         keyboardShouldPersistTaps="always"
         initialNumToRender={7}
         data={data}
-        keyExtractor={(item) => data.indexOf(item).toString()}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
         ListHeaderComponent={listHeader}
         ListFooterComponent={listFooter}

@@ -106,7 +106,6 @@ const PaymentDetails = () => {
           These Details are taken so that clients can pay you online. These
           credentials are kept confidential!
         </HelperText>
-        <View></View>
         <View style={styles.bstyle4}>
           <Title>Business Details</Title>
           <TextInput
