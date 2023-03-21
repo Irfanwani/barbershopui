@@ -357,7 +357,7 @@ export const logout = (ntk) => (dispatch, getState) => {
 };
 
 // details action
-export const details = (image, profile, userType) => (dispatch, getState) => {
+export const details = (image, profile) => (dispatch, getState) => {
   dispatch({
     type: actions.LOADING,
   });
@@ -388,7 +388,7 @@ export const details = (image, profile, userType) => (dispatch, getState) => {
   });
 
   axios
-    .post(BASE_URL + `/${userType}details`, data, config)
+    .post(BASE_URL + `/userdetails`, data, config)
     .then((res) => {
       showMessage({
         message: "Profile saved successfully!",
@@ -439,57 +439,54 @@ export const barbers =
   };
 
 // update details
-export const updateDetails =
-  (image, newDetails, employee_count) => (dispatch, getState) => {
-    dispatch({
-      type: actions.LOADING,
-    });
+export const updateDetails = (image, newDetails) => (dispatch, getState) => {
+  dispatch({
+    type: actions.LOADING,
+  });
 
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
-
-    const token = getState().authReducer.token;
-
-    if (token) {
-      config.headers["Authorization"] = `Token ${token}`;
-    }
-
-    const data = new FormData();
-
-    image &&
-      data.append("image", {
-        uri: image.assets[0].uri,
-        type: mime.getType(image.assets[0].uri),
-        name: image.assets[0].uri.split("/").pop(),
-      });
-
-    Object.keys(newDetails).forEach((key) => {
-      data.append(key, newDetails[key]);
-    });
-
-    const userType = employee_count ? "barber" : "user";
-
-    axios
-      .put(BASE_URL + `/${userType}details`, data, config)
-      .then((res) => {
-        showMessage({
-          message: "Profile updated successfully!",
-          type: "success",
-          icon: "success",
-        });
-        dispatch({
-          type: actions.DETAIL_SUCCESS,
-          payload: res.data,
-        });
-      })
-      .catch((err) => {
-        let check = tokenCheck(err, actions.DETAIL_UPDATE_FAIL);
-        dispatch(check);
-      });
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
   };
+
+  const token = getState().authReducer.token;
+
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
+
+  const data = new FormData();
+
+  image &&
+    data.append("image", {
+      uri: image.assets[0].uri,
+      type: mime.getType(image.assets[0].uri),
+      name: image.assets[0].uri.split("/").pop(),
+    });
+
+  Object.keys(newDetails).forEach((key) => {
+    data.append(key, newDetails[key]);
+  });
+
+  axios
+    .put(BASE_URL + `/userdetails`, data, config)
+    .then((res) => {
+      showMessage({
+        message: "Profile updated successfully!",
+        type: "success",
+        icon: "success",
+      });
+      dispatch({
+        type: actions.DETAIL_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      let check = tokenCheck(err, actions.DETAIL_UPDATE_FAIL);
+      dispatch(check);
+    });
+};
 
 // Delete account
 export const deleteAccount = () => (dispatch, getState) => {
@@ -570,7 +567,7 @@ export const setConfig = (getState) => {
 
 // check for invalid tokens
 export const tokenCheck = (err, type) => {
-  console.log(err, 'ERROR')
+  console.log(err, "ERROR");
   try {
     if (parseInt(err.response.status) == 401) {
       showMessage({

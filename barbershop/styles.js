@@ -42,8 +42,6 @@ const styles = StyleSheet.create({
   avatar: {
     backgroundColor: "grey",
     marginVertical: 10,
-    borderColor: "#6b6b47",
-    borderWidth: 2,
     overflow: "hidden",
   },
   fab: {

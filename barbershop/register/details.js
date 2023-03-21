@@ -9,14 +9,10 @@ import {
   Card,
   FAB,
   Colors,
-  RadioButton,
-  Title,
 } from "react-native-paper";
 
 import { connect } from "react-redux";
 import { details } from "../redux/actions/actions";
-
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 import RBSheet from "react-native-raw-bottom-sheet";
 
@@ -37,17 +33,10 @@ class Details extends React.Component {
     location: "",
     about: "",
     contact: "",
-    employee_count: "",
-    start_time: "",
-    end_time: "",
-    userType: "user",
     animating: false,
     addressChanged: false,
     standard: true,
     mapClicked: false,
-    showDateTimePicker: false,
-    startTimeClock: false,
-    currentTime: new Date(),
   };
 
   changeLocation = (location) => {
@@ -60,36 +49,6 @@ class Details extends React.Component {
 
   changeContact = (contact) => {
     this.setState({ contact });
-  };
-
-  changeEmployeeCount = (employee_count) => {
-    this.setState({ employee_count });
-  };
-
-  changeTime = (event, time) => {
-    let parsedTime;
-    if (time) {
-      parsedTime = time
-        .toTimeString()
-        .split(" ")[0]
-        .split(":")
-        .slice(0, 2)
-        .join(":");
-    } else {
-      this.setState({ showDateTimePicker: false });
-      return;
-    }
-
-    if (this.state.startTimeClock) {
-      this.setState({ start_time: parsedTime });
-    } else {
-      this.setState({ end_time: parsedTime });
-    }
-    this.setState({
-      startTimeClock: false,
-      showDateTimePicker: false,
-      currentTime: time,
-    });
   };
 
   galleryAsync = async () => {
@@ -197,18 +156,7 @@ class Details extends React.Component {
   };
 
   submit = () => {
-    const {
-      image,
-      lat,
-      lng,
-      location,
-      about,
-      contact,
-      employee_count,
-      start_time,
-      end_time,
-      userType,
-    } = this.state;
+    const { image, lat, lng, location, about, contact } = this.state;
 
     const profile = {
       lat,
@@ -216,31 +164,14 @@ class Details extends React.Component {
       location,
       about,
       contact,
-      employee_count,
-      start_time,
-      end_time,
     };
 
-    this.props.details(image, profile, userType);
+    this.props.details(image, profile);
   };
 
   render() {
-    const {
-      image,
-      lat,
-      lng,
-      location,
-      about,
-      contact,
-      employee_count,
-      start_time,
-      end_time,
-      userType,
-      animating,
-      standard,
-      showDateTimePicker,
-      currentTime,
-    } = this.state;
+    const { image, lat, lng, location, about, contact, animating, standard } =
+      this.state;
 
     const { error } = this.props;
     return (
@@ -446,86 +377,6 @@ class Details extends React.Component {
               <Text style={styles.error}>
                 {error ? (error.contact ? error.contact : "") : ""}
               </Text>
-
-              <RadioButton.Group
-                onValueChange={(userType) => this.setState({ userType })}
-                value={userType}
-              >
-                <Title>Login As:</Title>
-                <View style={styles.vstyle3}>
-                  <View style={styles.vstyle4}>
-                    <Text>Client</Text>
-                    <RadioButton value="user" />
-                  </View>
-                  <View style={styles.vstyle4}>
-                    <Text>Service Provider</Text>
-                    <RadioButton value="barber" />
-                  </View>
-                </View>
-              </RadioButton.Group>
-
-              {userType == "barber" && (
-                <View>
-                  <TextInput
-                    keyboardType="numeric"
-                    mode="outlined"
-                    value={employee_count}
-                    onChangeText={this.changeEmployeeCount}
-                    label="Number of Employees (Including you)"
-                    left={<TextInput.Icon name="briefcase" />}
-                    error={
-                      error ? (error.employee_count ? true : false) : false
-                    }
-                  />
-                  <Text style={styles.error}>
-                    {error
-                      ? error.employee_count
-                        ? error.employee_count
-                        : ""
-                      : ""}
-                  </Text>
-
-                  <View style={styles.vstyle5}>
-                    <FAB
-                      label={start_time ? start_time : "opening"}
-                      onPress={() =>
-                        this.setState({
-                          showDateTimePicker: true,
-                          startTimeClock: true,
-                        })
-                      }
-                      icon="timer"
-                      style={styles.fstyle1}
-                    />
-
-                    <FAB
-                      label={end_time ? end_time : "closing"}
-                      onPress={() =>
-                        this.setState({ showDateTimePicker: true })
-                      }
-                      icon="timer-off"
-                      style={styles.fstyle3}
-                    />
-
-                    {showDateTimePicker && (
-                      <DateTimePicker
-                        testID="dateTimePicker"
-                        value={currentTime}
-                        mode="time"
-                        display="default"
-                        onChange={this.changeTime}
-                      />
-                    )}
-                  </View>
-                  <Text style={styles.error}>
-                    {error
-                      ? error.start_end_error
-                        ? error.start_end_error
-                        : ""
-                      : ""}
-                  </Text>
-                </View>
-              )}
 
               <Text style={styles.error}>
                 {error ? (error.message ? error.message : "") : ""}
