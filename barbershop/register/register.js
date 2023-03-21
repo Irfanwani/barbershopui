@@ -97,6 +97,7 @@ class Register extends React.Component {
             />
             <View style={styles.vstyle1}>
               <TextInput
+                mode="outlined"
                 value={username}
                 onChangeText={this.changeUsername}
                 label="Username"
@@ -108,6 +109,7 @@ class Register extends React.Component {
               </Text>
 
               <TextInput
+                mode="outlined"
                 value={email}
                 onChangeText={this.changeEmail}
                 label="Email"
@@ -120,6 +122,7 @@ class Register extends React.Component {
               </Text>
 
               <TextInput
+                mode="outlined"
                 secureTextEntry={hidePassword}
                 value={password}
                 onChangeText={this.changePassword}
@@ -140,6 +143,7 @@ class Register extends React.Component {
               </Text>
 
               <TextInput
+                mode="outlined"
                 secureTextEntry={true}
                 value={passwordAgain}
                 onChangeText={this.changePasswordAgain}

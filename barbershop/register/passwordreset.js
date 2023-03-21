@@ -70,6 +70,7 @@ class PasswordReset extends React.Component {
             </Text>
 
             <TextInput
+              mode="outlined"
               autoCapitalize="none"
               value={email}
               onChangeText={this.changeEmail}
@@ -90,6 +91,7 @@ class PasswordReset extends React.Component {
             </Button>
 
             <TextInput
+              mode="outlined"
               autoCapitalize="none"
               value={code}
               onChangeText={this.changeCode}
@@ -102,6 +104,7 @@ class PasswordReset extends React.Component {
             </Text>
 
             <TextInput
+              mode="outlined"
               autoCapitalize="none"
               secureTextEntry={hidePassword}
               value={password}

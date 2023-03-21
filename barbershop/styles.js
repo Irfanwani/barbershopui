@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
 
   sstyle1: { justifyContent: "center", flex: 1 },
 
-  cstyle2: { borderRadius: 30, marginHorizontal: 5 },
+  cstyle2: { borderRadius: 30, marginHorizontal: 5, paddingHorizontal: 10 },
 
   astyle3: {
     height: Dimensions.get("window").height / 6 + statusbarheight,
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height / 1.2,
   },
 
-  cstyle4: { borderRadius: 30 },
+  cstyle4: { borderRadius: 30, paddingHorizontal: 10 },
 
   vstyle7: {
     padding: 5,

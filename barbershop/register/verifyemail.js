@@ -56,6 +56,7 @@ class VerifyEmail extends React.Component {
             />
 
             <TextInput
+              mode="outlined"
               label="Enter Verification code"
               value={this.state.code}
               onChangeText={this.changeCode}

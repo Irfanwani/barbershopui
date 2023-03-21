@@ -84,6 +84,7 @@ class Login extends React.Component {
               </Text>
 
               <TextInput
+                mode="outlined"
                 value={username}
                 onChangeText={this.changeUsername}
                 label="Username"
@@ -95,6 +96,7 @@ class Login extends React.Component {
               </Text>
 
               <TextInput
+                mode="outlined"
                 autoCorrect={false}
                 autoCapitalize="none"
                 secureTextEntry={hidePassword}
