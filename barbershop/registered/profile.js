@@ -4,7 +4,6 @@ import {
   Avatar,
   TextInput,
   Button,
-  HelperText,
   Colors,
   Card,
   FAB,
@@ -12,7 +11,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../styles";
 import RBSheet from "react-native-raw-bottom-sheet";
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { updateDetails } from "../redux/actions/actions";
 
@@ -22,8 +20,7 @@ import * as Location from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 
 const App = () => {
-  const { error, loading, details, username, email } = useSelector((state) => ({
-    error: state.errorReducer.error,
+  const { loading, details, username, email } = useSelector((state) => ({
     loading: state.errorReducer.loading,
     details: state.detailReducer.details ? state.detailReducer.details : {},
     username: state.authReducer.user?.username,
@@ -45,15 +42,6 @@ const App = () => {
   const [address, setAddress] = useState(details.location);
   const [about, setAbout] = useState(details.about);
   const [contact, setContact] = useState(details.contact);
-  const [employee_count, setEmployeeCount] = useState(
-    details.employee_count?.toString()
-  );
-  const [start_time, setStartTime] = useState(details.start_time);
-  const [end_time, setEndTime] = useState(details.end_time);
-
-  const [showDateTimePicker, setShowDateTimePicker] = useState(false);
-  const [startTimeClock, setStartTimeClock] = useState(false);
-  const [pickerValue, setPickerValue] = useState(new Date());
 
   const [fetching, setFetching] = useState(false);
   const [addrChanged, setAddrChanged] = useState(false);
@@ -185,30 +173,6 @@ const App = () => {
     }
   };
 
-  const changeTime = (event, time) => {
-    let parsedTime;
-    setShowDateTimePicker(false);
-    if (time) {
-      parsedTime = time
-        .toTimeString()
-        .split(" ")[0]
-        .split(":")
-        .slice(0, 2)
-        .join(":");
-    } else {
-      return;
-    }
-
-    if (startTimeClock) {
-      setStartTime(parsedTime);
-    } else {
-      setEndTime(parsedTime);
-    }
-
-    setStartTimeClock(false);
-    setPickerValue(time);
-  };
-
   const submit = () => {
     const newDetails = {
       lat,
@@ -216,17 +180,8 @@ const App = () => {
       location: address,
       about,
       contact,
-      employee_count,
-      start_time,
-      end_time,
     };
-    dispatch(
-      updateDetails(
-        image !== details.image ? image : null,
-        newDetails,
-        details.employee_count
-      )
-    );
+    dispatch(updateDetails(image !== details.image ? image : null, newDetails));
   };
 
   const mapclick = (e) => {
@@ -237,15 +192,6 @@ const App = () => {
 
   const changeStandard = () => {
     setStandard(!standard);
-  };
-
-  const alterclock = () => {
-    setShowDateTimePicker(true);
-    setStartTimeClock(true);
-  };
-
-  const showdtp = () => {
-    setShowDateTimePicker(true);
   };
 
   const toggleLM = () => {
@@ -412,49 +358,6 @@ const App = () => {
         value={contact}
         onChangeText={setContact}
       />
-      {details.employee_count && (
-        <View>
-          <TextInput
-            keyboardType="numeric"
-            label="Number of Employees(Including you)"
-            mode="flat"
-            left={<TextInput.Icon name="briefcase" />}
-            right={<TextInput.Icon name="pencil" color="teal" />}
-            value={employee_count}
-            onChangeText={setEmployeeCount}
-            error={error ? (error.employee_count ? true : false) : false}
-          />
-          <HelperText type="error">
-            {error ? (error.employee_count ? error.employee_count : "") : ""}
-          </HelperText>
-
-          <View style={styles.vstyle3}>
-            <FAB
-              label={start_time}
-              onPress={alterclock}
-              icon="timer"
-              style={styles.fstyle1}
-            />
-
-            <FAB
-              label={end_time}
-              onPress={showdtp}
-              icon="timer-off"
-              style={styles.fstyle3}
-            />
-
-            {showDateTimePicker && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={pickerValue}
-                mode="time"
-                display="default"
-                onChange={changeTime}
-              />
-            )}
-          </View>
-        </View>
-      )}
       <Button
         style={styles.button}
         mode="contained"
