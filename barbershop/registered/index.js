@@ -18,7 +18,7 @@ import { Barber, HeaderComponent } from "../components/renderItem";
 
 import { MultiSelect } from "../components/multiselect";
 
-import { data as serviceList } from "./addservices";
+import { services as serviceList } from "./services";
 
 import styles, {
   backgroundcolor,

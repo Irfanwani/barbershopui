@@ -3,7 +3,6 @@ import { useRef, useEffect, useState } from "react";
 import { View, TouchableOpacity, Image } from "react-native";
 
 import {
-  IconButton,
   Title,
   HelperText,
   FAB,
@@ -76,12 +75,8 @@ const CustomDrawer = (props) => {
       >
         <TouchableOpacity onPress={gotoProfile}>
           <Image style={styles.istyle} source={{ uri: image }} />
-          <Title style={styles.tstyle}>
-            <IconButton icon="account" size={20} color={headertextcolor} />
-            {username}
-          </Title>
+          <Title style={styles.tstyle}>{username}</Title>
           <HelperText style={styles.hstyle}>
-            <IconButton icon="phone" size={15} color={headertextcolor} />
             {contact ? contact : "No contact"}
           </HelperText>
         </TouchableOpacity>
@@ -96,10 +91,7 @@ const CustomDrawer = (props) => {
       <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
         <DrawerItemList {...props} />
 
-        <TouchableOpacity
-          onPress={shareApp}
-          style={styles.sharetouch}
-        >
+        <TouchableOpacity onPress={shareApp} style={styles.sharetouch}>
           <Icon name="share" size={22} color={backgroundcolor} />
           <Title style={styles.sharetitle}>Share</Title>
         </TouchableOpacity>

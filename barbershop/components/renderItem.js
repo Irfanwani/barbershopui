@@ -20,8 +20,6 @@ import { barbers } from "../redux/actions/actions";
 
 import styles, { styles2 } from "../styles";
 
-export default memo(RenderItemComponent);
-
 // Individual barber card
 export const Barber = memo((props) => {
   const [visible, setVisible] = useState(false);
