@@ -1,8 +1,7 @@
-import React, { memo, useState, forwardRef, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { View, TouchableOpacity, Image, ScrollView } from "react-native";
 
 import {
-  TextInput,
   Text,
   Card,
   Avatar,
@@ -19,76 +18,7 @@ import { useDispatch } from "react-redux";
 
 import { barbers } from "../redux/actions/actions";
 
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import styles, { backgroundcolor, styles2 } from "../styles";
-
-const RenderItemComponent = forwardRef(({ item, index, callback }, ref) => {
-  const [cost, setCost] = useState();
-  const [editable, setEditable] = useState(false);
-  const [submit, setSubmit] = useState(false);
-
-  const isFirstRender = useRef([true, true]);
-
-  useEffect(() => {
-    if (isFirstRender.current[0]) {
-      isFirstRender.current[0] = false;
-      return;
-    }
-    if (editable) {
-      ref.current[index].focus();
-    } else {
-      ref.current[index].blur();
-      setSubmit((prev) => !prev);
-    }
-  }, [editable]);
-
-  useEffect(() => {
-    if (isFirstRender.current[1]) {
-      isFirstRender.current[1] = false;
-      return;
-    }
-    callback({ service: item, cost }, editable);
-  }, [submit]);
-
-  const setRef = (rf) => {
-    ref.current[index] = rf;
-  };
-
-  const getCost = (cost) => {
-    setCost(cost);
-  };
-
-  const done = () => {
-    setSubmit((prev) => !prev);
-  };
-
-  const checkBoxAlter = (isChecked) => {
-    setEditable(isChecked);
-  };
-
-  return (
-    <BouncyCheckbox
-      fillColor={backgroundcolor}
-      textComponent={
-        <View style={styles2.vstyle}>
-          <Text style={styles2.tstyle}>{item}</Text>
-          <TextInput
-            ref={setRef}
-            value={editable ? cost : null}
-            onChangeText={getCost}
-            keyboardType="numeric"
-            style={editable ? styles2.tistyle : { width: 0 }}
-            placeholder="Price"
-            left={<TextInput.Icon name="currency-inr" disabled={true} />}
-            onBlur={done}
-            error={!cost && editable}
-          />
-        </View>
-      }
-      onPress={checkBoxAlter}
-    />
-  );
-});
+import styles, { styles2 } from "../styles";
 
 export default memo(RenderItemComponent);
 

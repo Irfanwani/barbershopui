@@ -34,9 +34,7 @@ import Index from "./registered/index";
 import Info from "./registered/info";
 import Appointments from "./registered/appointments";
 import Profile from "./registered/profile";
-import PaymentDetails from "./registered/paymentdetails";
 import Settings from "./registered/settings";
-import AddServices from "./registered/addservices";
 
 import FlashMessage from "react-native-flash-message";
 
@@ -184,25 +182,16 @@ const DrawerScreens = (props) => {
 const UnRegisteredStack = () => {
   const [mounted, setMounted] = useState(false);
 
-  const {
-    token,
-    verified,
-    loading,
-    details,
-    darkmode,
-    newUser,
-    account_added,
-    services_added,
-  } = useSelector((state) => ({
-    token: state.authReducer.token,
-    verified: state.emailReducer.verified,
-    loading: state.errorReducer.loading,
-    details: state.detailReducer.details,
-    darkmode: state.themeReducer.darkmode,
-    newUser: state.newuserReducer.newUser,
-    account_added: state.compeletionReducer.account_added,
-    services_added: state.compeletionReducer.services_added,
-  }));
+  const { token, verified, loading, details, darkmode, newUser } = useSelector(
+    (state) => ({
+      token: state.authReducer.token,
+      verified: state.emailReducer.verified,
+      loading: state.errorReducer.loading,
+      details: state.detailReducer.details,
+      darkmode: state.themeReducer.darkmode,
+      newUser: state.newuserReducer.newUser,
+    })
+  );
 
   const dispatch = useDispatch();
 
@@ -226,7 +215,7 @@ const UnRegisteredStack = () => {
       <NavigationContainer
         theme={darkmode ? CustomDarkTheme : CustomDefaultTheme}
       >
-        {token == null ? (
+        {!token ? (
           <Stack.Navigator
             initialRouteName={newUser ? "landingpage" : "login"}
             screenOptions={{
@@ -249,33 +238,19 @@ const UnRegisteredStack = () => {
               animation: "slide_from_right",
             }}
           >
-            {verified == null ? (
+            {!verified ? (
               <Stack.Screen name="verifyemail" component={VerifyEmail} />
             ) : (
               <>
-                {details == null ? (
+                {!details ? (
                   <Stack.Screen name="details" component={Details} />
                 ) : (
                   <>
-                    {details?.employee_count && !account_added ? (
-                      <Stack.Screen
-                        name="paymentdetails"
-                        component={PaymentDetails}
-                      />
-                    ) : details?.employee_count && !services_added ? (
-                      <Stack.Screen
-                        name="addservices"
-                        component={AddServices}
-                      />
-                    ) : (
-                      <>
-                        <Stack.Screen
-                          name="drawerscreens"
-                          component={DrawerScreens}
-                        />
-                        <Stack.Screen name="Info" component={Info} />
-                      </>
-                    )}
+                    <Stack.Screen
+                      name="drawerscreens"
+                      component={DrawerScreens}
+                    />
+                    <Stack.Screen name="Info" component={Info} />
                   </>
                 )}
               </>
