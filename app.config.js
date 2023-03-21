@@ -16,12 +16,6 @@ export default {
     slug: "barbershop",
     version: "1.0.0",
     assetBundlePatterns: ["**/*"],
-    icon: "./assets/icon.png",
-    splash: {
-      image: "./assets/splash.png",
-      resizeMode: "contain",
-      backgroundColor: "#ffffff",
-    },
     extra: {
       eas: {
         projectId: "728d160a-064d-463c-8eca-c81df30dc772",
@@ -34,8 +28,7 @@ export default {
     },
     android: {
       googleServicesFile:
-        process.env.GOOGLE_SERVICES ??
-        "./android/app/google-services.json",
+        process.env.GOOGLE_SERVICES ?? "./android/app/google-services.json",
     },
   },
 };
