@@ -126,31 +126,33 @@ const DrawerScreens = (props) => {
         drawerType: "slide",
         drawerActiveBackgroundColor: backgroundcolor,
         drawerActiveTintColor: headertextcolor,
+        drawerInactiveTintColor: backgroundcolor,
         headerStyle: { backgroundColor: theme.colors.bgcolor },
         headerTintColor: headertextcolor,
         swipeEdgeWidth: width / 4,
       }}
       drawerContent={(props) => <CustomDrawer {...props} />}
-      useLegacyImplementation={true}
       initialRouteName="Home"
     >
       <Drawer.Screen
         options={{
           title: "Home",
-          drawerIcon: () => <IconButton icon="home-outline" />,
+          drawerIcon: ({ color }) => (
+            <IconButton color={color} icon="home-outline" />
+          ),
         }}
         name="index"
         component={Index}
       />
       <Drawer.Screen
         options={{
-          drawerIcon: () => <IconButton icon="briefcase-clock-outline" />,
-          drawerLabel: () => (
+          drawerIcon: ({ color }) => (
+            <IconButton color={color} icon="briefcase-clock-outline" />
+          ),
+          drawerLabel: ({ color }) => (
             <View style={styles.dlstyle}>
-              <Text>Appointments</Text>
-              <Badge style={styles.bastyle}>
-                {appointments ? appointments.length : 0}
-              </Badge>
+              <Text style={{ color }}>Appointments</Text>
+              <Badge style={styles.bastyle}>{appointments?.length ?? 0}</Badge>
             </View>
           ),
         }}
@@ -159,14 +161,18 @@ const DrawerScreens = (props) => {
       />
       <Drawer.Screen
         options={{
-          drawerIcon: () => <IconButton icon="account-details-outline" />,
+          drawerIcon: ({ color }) => (
+            <IconButton color={color} icon="account-details-outline" />
+          ),
         }}
         name="Profile"
         component={Profile}
       />
       <Drawer.Screen
         options={{
-          drawerIcon: () => <IconButton icon="cog-outline" />,
+          drawerIcon: ({ color }) => (
+            <IconButton color={color} icon="cog-outline" />
+          ),
         }}
         name="Settings"
         component={Settings}

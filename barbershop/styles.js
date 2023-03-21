@@ -9,6 +9,13 @@ export const darkbackgroundcolor = Colors.blueGrey900;
 const statusbarheight = Constants.statusBarHeight + 5;
 
 const styles = StyleSheet.create({
+  sharetouch: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  sharetitle: { color: backgroundcolor, fontSize: 15, paddingHorizontal: 20 },
   view: {
     justifyContent: "center",
     marginHorizontal: 10,

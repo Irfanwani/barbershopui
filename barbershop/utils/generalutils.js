@@ -1,10 +1,10 @@
 import Share from "react-native-share";
 
 const options = {
-  title: "Barbershop Services App",
+  title: "Barbershop App",
   message:
-    "Download the barbershop services app from playstore for free to connect with new clients and manage your appoinments.",
-  url: "https://play.google.com/store/apps/details?id=com.servicebarbershop",
+    "Download the barbershop app from playstore for free to connect with barbers around you and save time by fixing appointments.",
+  url: "https://play.google.com/store/apps/details?id=com.barbershop",
 };
 
 export const shareApp = async () => {

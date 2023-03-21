@@ -16,12 +16,14 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import styles, { headertextcolor } from "./styles";
+import styles, { backgroundcolor, headertextcolor } from "./styles";
 
 import { useSelector, useDispatch } from "react-redux";
 import { CHANGE_THEME } from "./redux/actions/types";
 import { useTheme } from "@react-navigation/native";
 import { LogoutDialog } from "./options";
+import { shareApp } from "./utils/generalutils";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const CustomDrawer = (props) => {
   const { image, username, darkmode, contact } = useSelector((state) => ({
@@ -93,6 +95,14 @@ const CustomDrawer = (props) => {
       </View>
       <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
         <DrawerItemList {...props} />
+
+        <TouchableOpacity
+          onPress={shareApp}
+          style={styles.sharetouch}
+        >
+          <Icon name="share" size={22} color={backgroundcolor} />
+          <Title style={styles.sharetitle}>Share</Title>
+        </TouchableOpacity>
 
         <View style={styles.vstyle}>
           <Divider />
