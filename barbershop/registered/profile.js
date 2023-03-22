@@ -14,10 +14,10 @@ import RBSheet from "react-native-raw-bottom-sheet";
 
 import { updateDetails } from "../redux/actions/actions";
 
-import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
 import MapView, { Marker } from "react-native-maps";
+import { cameraImageAsync, galleryImageAsync } from "../utils/getassets";
 
 const App = () => {
   const { loading, details, username, email } = useSelector((state) => ({
@@ -59,35 +59,18 @@ const App = () => {
 
   // image handling
   const galleryAsync = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      alert("Media Library permissions denied!");
-      return;
-    }
-    let image = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-    });
-
-    if (!image.canceled) {
+    let im = await galleryImageAsync();
+    if (im) {
       ImageRBSheet.current.close();
-      setImage(image.assets[0].uri);
+      setImage(im);
     }
   };
 
   const cameraAsync = async () => {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== "granted") {
-      alert("Camera permissions denied!");
-      return;
-    }
-
-    let image = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-    });
-
-    if (!image.canceled) {
+    let im = await cameraImageAsync();
+    if (im) {
       ImageRBSheet.current.close();
-      setImage(image.assets[0].uri);
+      setImage(im);
     }
   };
 

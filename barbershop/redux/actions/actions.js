@@ -179,7 +179,7 @@ const barberCheck = (res, dispatch) => {
       position: "center",
       duration: 15000,
       renderCustomContent: () => <CustomAlert />,
-      titleStyle: { alignSelf: "center", fontSize: 25,  lineHeight: 30},
+      titleStyle: { alignSelf: "center", fontSize: 25, lineHeight: 30 },
     });
     return true;
   }
@@ -401,9 +401,9 @@ export const details = (image, profile) => (dispatch, getState) => {
 
   image &&
     data.append("image", {
-      uri: image.assets[0].uri,
-      type: mime.getType(image.assets[0].uri),
-      name: image.assets[0].uri.split("/").pop(),
+      uri: image,
+      type: mime.getType(image),
+      name: image.split("/").pop(),
     });
 
   Object.keys(profile).forEach((key) => {

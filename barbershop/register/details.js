@@ -18,12 +18,12 @@ import RBSheet from "react-native-raw-bottom-sheet";
 
 import MapView, { Marker } from "react-native-maps";
 
-import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
 import * as Animatable from "react-native-animatable";
 
 import styles, { backgroundcolor } from "../styles";
+import { cameraImageAsync, galleryImageAsync } from "../utils/getassets";
 
 class Details extends React.Component {
   state = {
@@ -52,34 +52,16 @@ class Details extends React.Component {
   };
 
   galleryAsync = async () => {
-    let { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (status !== "granted") {
-      alert("Media library permissions denied!");
-      return;
-    }
-    let image = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-    });
-
-    if (!image.canceled) {
+    let image = await galleryImageAsync();
+    if (image) {
       this.setState({ image });
       this.ImageRBSheet.close();
     }
   };
 
   cameraAsync = async () => {
-    let { status } = await ImagePicker.requestCameraPermissionsAsync();
-
-    if (status !== "granted") {
-      alert("Camera permissions denied!");
-      return;
-    }
-    let image = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-    });
-
-    if (!image.canceled) {
+    let image = await cameraImageAsync();
+    if (image) {
       this.setState({ image });
       this.ImageRBSheet.close();
     }
