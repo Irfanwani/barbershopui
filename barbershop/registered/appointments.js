@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, SectionList } from "react-native";
+import { View, FlatList } from "react-native";
 import {
   Text,
   Colors,
@@ -203,44 +203,14 @@ const Appointments = () => {
 
   const ListFooter = () => <View style={{ padding: 20 }}></View>;
 
-  const data = [
-    {
-      title: "Appointments fixed by you.",
-      data: appointments
-        ? appointments.filter((apnt) => apnt.user == username)
-        : [],
-    },
-    {
-      title: "Appointments fixed with you.",
-      data: appointments
-        ? appointments.filter(
-            (apnt) => apnt.barber == username && apnt.user !== username
-          )
-        : [],
-    },
-  ];
-
-  const emptyCheck = (data) => {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].data.length > 0) {
-        return data;
-      }
-    }
-    return [];
-  };
-
   return (
     <View style={styles.vstyle6}>
-      <SectionList
-        sections={emptyCheck(data)}
+      <FlatList
+        data={appointments}
         renderItem={renderAppointment}
         ListEmptyComponent={ListEmptyComponent}
-        keyExtractor={(item) => item.id.toString()}
         refreshing={fetching}
         onRefresh={refreshPage}
-        renderSectionHeader={({ section }) =>
-          section.data.length > 0 ? renderSectionHeader(section) : null
-        }
         ListFooterComponent={ListFooter}
       />
 

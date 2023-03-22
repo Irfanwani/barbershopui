@@ -217,7 +217,10 @@ const App = () => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingHorizontal: 10 }}
+    >
       <Card.Title title={username} subtitle={email} />
       <View style={styles.view7}>
         <Avatar.Image
@@ -256,7 +259,7 @@ const App = () => {
       <TextInput
         ref={addressInput}
         label="Address details"
-        mode="flat"
+        mode="outlined"
         left={<TextInput.Icon name="map-marker" />}
         right={
           <TextInput.Icon
@@ -344,7 +347,7 @@ const App = () => {
         numberOfLines={4}
         maxLength={1000}
         label="About"
-        mode="flat"
+        mode="outlined"
         left={<TextInput.Icon name="information" />}
         right={<TextInput.Icon name="pencil" color="teal" />}
         value={about}
@@ -352,7 +355,7 @@ const App = () => {
       />
       <TextInput
         label="Contact"
-        mode="flat"
+        mode="outlined"
         left={<TextInput.Icon name="card-account-phone" />}
         right={<TextInput.Icon name="pencil" color="teal" />}
         value={contact}

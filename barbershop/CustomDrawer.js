@@ -92,7 +92,7 @@ const CustomDrawer = (props) => {
         <DrawerItemList {...props} />
 
         <TouchableOpacity onPress={shareApp} style={styles.sharetouch}>
-          <Icon name="share" size={22} color={backgroundcolor} />
+          <Icon name="share" size={20} color={backgroundcolor} />
           <Title style={styles.sharetitle}>Share</Title>
         </TouchableOpacity>
 
