@@ -6,6 +6,8 @@ import FormData from "form-data";
 import mime from "mime";
 import { styles2 } from "../../styles";
 import Constants from "expo-constants";
+import { Linking } from "react-native";
+import { CustomAlert } from "../../components/customalert";
 
 const BASE_URL = Constants.expoConfig.extra.BASE_URL;
 const BASE_URL_2 = Constants.expoConfig.extra.BASE_URL_2;
@@ -166,6 +168,24 @@ export const getEmailCode = () => (dispatch, getState) => {
     });
 };
 
+const barberCheck = (res, dispatch) => {
+  if (res.data.details && res.data.is_barber) {
+    dispatch({
+      type: actions.GET_ERRORS,
+    });
+
+    showMessage({
+      message: "Oops!",
+      position: "center",
+      duration: 15000,
+      renderCustomContent: () => <CustomAlert />,
+      titleStyle: { alignSelf: "center", fontSize: 25,  lineHeight: 30},
+    });
+    return true;
+  }
+  return false;
+};
+
 // Login action
 export const login =
   ({ username, password }) =>
@@ -185,6 +205,7 @@ export const login =
     axios
       .post(BASE_URL + "/login", body, config)
       .then((res) => {
+        if (barberCheck(res, dispatch)) return;
         showMessage({
           message: "Login success!",
           type: "success",
@@ -281,6 +302,8 @@ export const passwordReset =
     axios
       .put(BASE_URL + "/passwordreset", body, config)
       .then((res) => {
+        if (barberCheck(res, dispatch)) return;
+
         showMessage({
           message: "Password reset success! You are logged in now!",
           type: "success",
