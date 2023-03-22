@@ -142,7 +142,11 @@ class Login extends React.Component {
               </Button>
 
               <Text style={styles.tstyle5}>Don't have an account? </Text>
-              <Button onPress={this.gotoRegister} labelStyle={styles.bstyle1}>
+              <Button
+                style={styles.movebutton}
+                onPress={this.gotoRegister}
+                labelStyle={styles.bstyle1}
+              >
                 Register Here!
               </Button>
             </View>

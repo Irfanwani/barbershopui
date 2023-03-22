@@ -15,7 +15,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments, removeAppointment } from "../redux/actions/actions2";
 
-import styles, { styles2 } from "../styles";
+import styles, { backgroundcolor, styles2 } from "../styles";
 
 import AlertPro from "react-native-alert-pro";
 
@@ -150,7 +150,7 @@ const Appointments = () => {
             <Title style={styles.tistyle}>₹{item.totalcost}</Title>
             {item.user == username &&
               (!item.paid ? (
-                <Button onPress={chOut} mode="contained" color="teal">
+                <Button onPress={chOut} mode="contained" color={backgroundcolor}>
                   PAY
                 </Button>
               ) : null)}

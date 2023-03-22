@@ -12,7 +12,7 @@ import { AirbnbRating } from "react-native-ratings";
 
 import * as Animatable from "react-native-animatable";
 
-import styles, { styles2 } from "../styles";
+import styles, { backgroundcolor, styles2 } from "../styles";
 
 const Ratings = (props) => {
 	const { visible, callback, callback2, id, barber } = props;
@@ -80,7 +80,7 @@ const Ratings = (props) => {
 			/>
 
 			<Button
-				color="teal"
+				color={backgroundcolor}
 				icon="check"
 				style={styles.bstyle6}
 				mode="contained"

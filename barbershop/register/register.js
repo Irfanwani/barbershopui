@@ -167,7 +167,11 @@ class Register extends React.Component {
               </Button>
 
               <Text style={styles.tstyle5}>Already have an account? </Text>
-              <Button onPress={this.gotoLogin} labelStyle={styles.bstyle1}>
+              <Button
+                style={styles.movebutton}
+                onPress={this.gotoLogin}
+                labelStyle={styles.bstyle1}
+              >
                 Login Here!
               </Button>
             </View>

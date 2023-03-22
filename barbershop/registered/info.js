@@ -46,7 +46,7 @@ import Reviews from "../components/reviews";
 
 import * as Animatable from "react-native-animatable";
 
-import styles from "../styles";
+import styles, { backgroundcolor } from "../styles";
 
 const CustomRatings = ({ avg_ratings }) => {
   const theme = useTheme();
@@ -235,7 +235,7 @@ class Info extends React.PureComponent {
                   <CustomRatings avg_ratings={avg_ratings} />
 
                   <Button
-                    color="teal"
+                    color={backgroundcolor}
                     icon="arrow-right"
                     contentStyle={styles.bustyle}
                     style={styles.bstyle7}

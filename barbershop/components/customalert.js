@@ -1,6 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import { Linking, View } from "react-native";
 import { Button, Divider, Text } from "react-native-paper";
+import { backgroundcolor } from "../styles";
 
 export const CustomAlert = () => {
   const installApp = async () => {
@@ -20,7 +21,7 @@ export const CustomAlert = () => {
 
       <Button
         mode="contained"
-        color="teal"
+        color={backgroundcolor}
         style={{ marginTop: 5 }}
         onPress={installApp}
       >

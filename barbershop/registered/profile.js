@@ -9,7 +9,7 @@ import {
   FAB,
 } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "../styles";
+import styles, { backgroundcolor } from "../styles";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { updateDetails } from "../redux/actions/actions";
@@ -264,7 +264,7 @@ const App = () => {
         right={
           <TextInput.Icon
             name="pencil"
-            color="teal"
+            color={backgroundcolor}
             onPress={openLRBS}
             forceTextInputFocus={false}
           />
@@ -349,7 +349,7 @@ const App = () => {
         label="About"
         mode="outlined"
         left={<TextInput.Icon name="information" />}
-        right={<TextInput.Icon name="pencil" color="teal" />}
+        right={<TextInput.Icon name="pencil" color={backgroundcolor} />}
         value={about}
         onChangeText={setAbout}
       />
@@ -357,7 +357,7 @@ const App = () => {
         label="Contact"
         mode="outlined"
         left={<TextInput.Icon name="card-account-phone" />}
-        right={<TextInput.Icon name="pencil" color="teal" />}
+        right={<TextInput.Icon name="pencil" color={backgroundcolor} />}
         value={contact}
         onChangeText={setContact}
       />

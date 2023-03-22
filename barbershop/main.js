@@ -76,6 +76,7 @@ const CustomDefaultTheme = {
     ...DefaultTheme.colors,
     ...PaperDefaultTheme.colors,
     bgcolor: backgroundcolor,
+    primary: backgroundcolor,
   },
 };
 
@@ -88,6 +89,7 @@ const CustomDarkTheme = {
     background: "#222223",
     text: "#ffffff",
     bgcolor: darkbackgroundcolor,
+    primary: backgroundcolor,
   },
 };
 
