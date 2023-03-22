@@ -83,7 +83,6 @@ class PasswordReset extends React.Component {
             </Text>
 
             <Button
-              color={backgroundcolor}
               onPress={() => this.props.passwordResetCode({ email })}
               icon="qrcode-plus"
             >

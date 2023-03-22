@@ -19,12 +19,7 @@ export const CustomAlert = () => {
       </Text>
       <Divider />
 
-      <Button
-        mode="contained"
-        color={backgroundcolor}
-        style={{ marginTop: 5 }}
-        onPress={installApp}
-      >
+      <Button mode="contained" style={{ marginTop: 5 }} onPress={installApp}>
         Get Service App
       </Button>
     </View>

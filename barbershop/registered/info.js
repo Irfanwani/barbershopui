@@ -235,7 +235,6 @@ class Info extends React.PureComponent {
                   <CustomRatings avg_ratings={avg_ratings} />
 
                   <Button
-                    color={backgroundcolor}
                     icon="arrow-right"
                     contentStyle={styles.bustyle}
                     style={styles.bstyle7}
@@ -282,9 +281,10 @@ class Info extends React.PureComponent {
 
           <FAB
             color={Colors.green50}
-            icon="check"
+            icon="handshake"
             style={styles.fstyle7}
-            label="fix appointment"
+            label="Fix Appointment"
+            uppercase={false}
             onPress={this.showServices}
           />
 

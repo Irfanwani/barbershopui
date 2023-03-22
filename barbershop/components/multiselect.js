@@ -146,12 +146,7 @@ export const MultiSelect = (props) => {
           showsVerticalScrollIndicator={false}
         />
 
-        <Button
-          onPress={applyFilter}
-          mode="contained"
-          icon="check"
-          color={Colors.teal500}
-        >
+        <Button onPress={applyFilter} mode="contained" icon="check">
           {buttonLabel}
         </Button>
       </Modal>

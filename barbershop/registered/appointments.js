@@ -150,7 +150,7 @@ const Appointments = () => {
             <Title style={styles.tistyle}>₹{item.totalcost}</Title>
             {item.user == username &&
               (!item.paid ? (
-                <Button onPress={chOut} mode="contained" color={backgroundcolor}>
+                <Button onPress={chOut} mode="contained">
                   PAY
                 </Button>
               ) : null)}

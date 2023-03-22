@@ -77,6 +77,7 @@ const CustomDefaultTheme = {
     ...PaperDefaultTheme.colors,
     bgcolor: backgroundcolor,
     primary: backgroundcolor,
+    accent: backgroundcolor,
   },
 };
 
@@ -90,6 +91,7 @@ const CustomDarkTheme = {
     text: "#ffffff",
     bgcolor: darkbackgroundcolor,
     primary: backgroundcolor,
+    accent: backgroundcolor,
   },
 };
 

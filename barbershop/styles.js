@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import { Colors } from "react-native-paper";
 import Constants from "expo-constants";
 
-export const backgroundcolor = Colors.teal500;
+export const backgroundcolor = Colors.blueGrey500;
 export const headertextcolor = "white";
 export const darkbackgroundcolor = Colors.blueGrey900;
 
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
 
   fab3: {
-    backgroundColor: Colors.teal500,
+    backgroundColor: backgroundcolor,
   },
 
   badge: {
