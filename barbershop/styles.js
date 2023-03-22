@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
 
   view1: {
     flexDirection: "row",
-    width: Dimensions.get("window").width - 10,
+    width: Dimensions.get("window").width,
   },
 
   testyle1: {
