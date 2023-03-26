@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
 
   rbsheet: {
-    backgroundColor: "black",
+    backgroundColor: backgroundcolor,
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
   },

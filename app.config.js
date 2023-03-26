@@ -22,8 +22,7 @@ export default {
       },
       GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
       BASE_URL: process.env.BASE_URL,
-      BASE_URL_2: process.env.BASE_URL_2,
-      BASE_URL_3: process.env.BASE_URL_3,
+      BASE_URL_PROD: process.env.BASE_URL_PROD,
       PUSH_NOTIFICATION_URL: process.env.PUSH_NOTIFICATION_URL,
     },
     android: {

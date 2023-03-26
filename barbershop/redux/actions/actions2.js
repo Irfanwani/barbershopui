@@ -1,12 +1,12 @@
 import axios from "axios";
 import { showMessage } from "react-native-flash-message";
 import * as actions from "./types";
-import { setConfig, tokenCheck } from "./actions";
+import { baseUrl, setConfig, tokenCheck } from "./actions";
 
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 
-const BASE_URL = Constants.expoConfig.extra.BASE_URL_2;
+const BASE_URL = baseUrl + "/api/haircut";
 
 const Notification_url = Constants.expoConfig.extra.PUSH_NOTIFICATION_URL;
 

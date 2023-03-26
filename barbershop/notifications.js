@@ -2,9 +2,9 @@ import * as Notifications from "expo-notifications";
 
 import axios from "axios";
 
-import Constants from "expo-constants";
+import { baseUrl } from "./redux/actions/actions";
 
-const BASE_URL = Constants.expoConfig.extra.BASE_URL_2;
+const BASE_URL = baseUrl+'/api/haircut';
 
 export const notification_manager = async (id, authToken) => {
   let { status } = await Notifications.requestPermissionsAsync();

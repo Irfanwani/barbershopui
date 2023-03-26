@@ -216,7 +216,7 @@ const App = () => {
       <RBSheet
         animationType="slide"
         ref={ImageRBSheet}
-        height={Dimensions.get("window").height / 4}
+        height={Dimensions.get("window").height / 5}
         closeOnDragDown={true}
         customStyles={{
           container: styles.rbsheet,

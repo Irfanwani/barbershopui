@@ -1,15 +1,9 @@
 import React from "react";
 import { View, TouchableOpacity, Image } from "react-native";
 import { Colors, Text, Button } from "react-native-paper";
-
 import { useDispatch } from "react-redux";
-
 import { LinearGradient } from "expo-linear-gradient";
-
-import { backgroundcolor } from "../styles";
-
 import * as Animatable from "react-native-animatable";
-
 import styles from "../styles";
 import { NEW_USER } from "../redux/actions/types";
 
@@ -30,7 +24,7 @@ const App = (props) => {
         style={styles.front}
       >
         <LinearGradient
-          colors={[backgroundcolor, Colors.green200]}
+          colors={[Colors.teal500, Colors.greenA100]}
           style={styles.lgstyle}
         >
           <Text style={styles.tag}>BarberShop</Text>

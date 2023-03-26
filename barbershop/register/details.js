@@ -187,7 +187,7 @@ class Details extends React.Component {
               <View style={styles.view7}>
                 {(image && (
                   <Avatar.Image
-                    source={{ uri: image.assets[0].uri }}
+                    source={{ uri: image }}
                     size={150}
                     style={styles.avatar}
                   />
@@ -210,7 +210,7 @@ class Details extends React.Component {
                 ref={(ref) => {
                   this.ImageRBSheet = ref;
                 }}
-                height={Dimensions.get("window").height / 4}
+                height={Dimensions.get("window").height / 5}
                 closeOnDragDown={true}
                 customStyles={{
                   container: styles.rbsheet,

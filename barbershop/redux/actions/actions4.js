@@ -1,15 +1,14 @@
 import axios from "axios";
 import RazorpayCheckout from "react-native-razorpay";
-import { setConfig, tokenCheck } from "./actions";
+import { baseUrl, setConfig, tokenCheck } from "./actions";
 import { GET_ERRORS, LOADING } from "./types";
 
 import { getAppointments } from "./actions2";
 import { showMessage } from "react-native-flash-message";
 
 import { styles2 } from "../../styles";
-import Constants from "expo-constants";
 
-const BASE_URL = Constants.expoConfig.extra.BASE_URL_3;
+const BASE_URL = baseUrl + "/api/payments";
 
 export const checkout =
   ({ amount, currency, barber, email, apnt_id }) =>

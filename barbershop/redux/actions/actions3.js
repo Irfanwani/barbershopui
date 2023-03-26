@@ -6,13 +6,12 @@ import {
 } from "./types";
 
 import axios from "axios";
-import { setConfig, tokenCheck } from "./actions";
+import { baseUrl, setConfig, tokenCheck } from "./actions";
 import { showMessage } from "react-native-flash-message";
 
 import { styles2 } from "../../styles";
-import Constants from "expo-constants";
 
-const BASE_URL = Constants.expoConfig.extra.BASE_URL;
+const BASE_URL = baseUrl+'/api/accounts';
 
 export const getServices = (id, callback) => (dispatch, getState) => {
   dispatch({

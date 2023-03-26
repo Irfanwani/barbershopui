@@ -6,11 +6,14 @@ import FormData from "form-data";
 import mime from "mime";
 import { styles2 } from "../../styles";
 import Constants from "expo-constants";
-import { Linking } from "react-native";
 import { CustomAlert } from "../../components/customalert";
 
-const BASE_URL = Constants.expoConfig.extra.BASE_URL;
-const BASE_URL_2 = Constants.expoConfig.extra.BASE_URL_2;
+export const baseUrl =
+  process.env.NODE_ENV == "development"
+    ? Constants.expoConfig.extra.BASE_URL
+    : Constants.expoConfig.extra.BASE_URL_PROD;
+const BASE_URL = baseUrl + "/api/accounts";
+const BASE_URL_2 = baseUrl + "/api/haircut";
 
 // full authentication including email verification and details check
 export const authenticate = () => (dispatch, getState) => {
