@@ -338,6 +338,7 @@ const App = () => {
       />
       <TextInput
         label="Contact"
+        maxLength={40}
         mode="outlined"
         left={<TextInput.Icon name="card-account-phone" />}
         right={<TextInput.Icon name="pencil" color={backgroundcolor} />}

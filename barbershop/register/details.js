@@ -353,6 +353,7 @@ class Details extends React.Component {
                 value={contact}
                 onChangeText={this.changeContact}
                 label="Contact"
+                maxLength={40}
                 left={<TextInput.Icon name="card-account-phone" />}
                 error={error ? (error.contact ? true : false) : false}
               />

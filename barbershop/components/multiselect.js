@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, ToastAndroid, View } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {
   Button,
@@ -46,8 +46,12 @@ export const MultiSelect = (props) => {
     clearSelection,
     barbersFilter,
     buttonLabel,
+    fixing = false,
   } = props;
 
+  useEffect(() => {
+    if (visible && fixing) setSelectedItems([]);
+  }, [visible]);
   const [selectedItems, setSelectedItems] = useState([]);
 
   const theme = useTheme();
@@ -69,6 +73,20 @@ export const MultiSelect = (props) => {
       isFirstRender.current = false;
       return;
     }
+    if (fixing) {
+      if (selectedItems.length > 3) {
+        ToastAndroid.show("Only 3 services can be selected at once", 2000);
+        return;
+      }
+
+      if (selectedItems.length == 0) {
+        ToastAndroid.show("Select atleast one service and proceed", 2000);
+        return;
+      }
+    }
+
+    callback2(false);
+
     callback(selectedItems.length);
 
     if (callback3) {
@@ -88,13 +106,12 @@ export const MultiSelect = (props) => {
         iconStyle={{ borderRadius: 4 }}
         fillColor={backgroundcolor}
         textComponent={<TextComponent item={item} />}
-        isChecked={selectedItems.includes(item) ? true : false}
+        isChecked={selectedItems.includes(item)}
       />
     );
   };
 
   const applyFilter = () => {
-    callback2(false);
     ref.current.map((el, index) => {
       if (el.state.checked) {
         if (!selectedItems.includes(data[index])) {
@@ -142,7 +159,7 @@ export const MultiSelect = (props) => {
           renderItem={renderItem}
           keyExtractor={(item) => data.indexOf(item).toString()}
           ItemSeparatorComponent={itemSepComp}
-          ListFooterComponent={<View style={styles2.divider}></View>}
+          ListFooterComponent={<View style={styles2.divider} />}
           showsVerticalScrollIndicator={false}
         />
 

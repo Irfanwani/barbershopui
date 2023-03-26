@@ -89,6 +89,8 @@ class Info extends React.PureComponent {
     }
     this.setState({ showDTPicker: false });
 
+    if (event.type == "dismissed") return;
+
     this.setState(
       this.state.mode == "time"
         ? {
@@ -297,6 +299,7 @@ class Info extends React.PureComponent {
             callback2={this.callback2}
             callback3={this.callback3}
             buttonLabel="Proceed"
+            fixing={true}
           />
 
           <Portal>
