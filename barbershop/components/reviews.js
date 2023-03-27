@@ -10,11 +10,13 @@ import {
   useTheme,
   Colors,
   Text,
+  Avatar,
 } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Rating } from "react-native-ratings";
 import { delReview } from "../redux/actions/actions2";
+import { baseUrl } from "../redux/actions/actions";
 
 const Reviews = (props) => {
   const { reviews, username } = useSelector((state) => ({
@@ -28,11 +30,11 @@ const Reviews = (props) => {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current && visible) {
+    if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-  }, [visible]);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -44,7 +46,10 @@ const Reviews = (props) => {
     return (
       <Surface style={styles.sustyle}>
         <View style={styles.vstyle2}>
-          <Title>{item.user}</Title>
+          <View style={styles.vstyle2}>
+            <Avatar.Image size={40} source={{ uri: baseUrl + item.dp }} />
+            <Title style={styles.bstyle}>{item.user}</Title>
+          </View>
           {item.user == username && (
             <IconButton
               icon="delete"
@@ -58,7 +63,7 @@ const Reviews = (props) => {
         <Rating
           imageSize={15}
           style={styles2.rstyle}
-          tintColor={theme.colors.background}
+          tintColor={theme.colors.surface}
           readonly={true}
           startingValue={item.ratings}
         />
@@ -80,7 +85,7 @@ const Reviews = (props) => {
         <IconButton icon="close" style={styles2.ibstyle} onPress={callback} />
 
         <FlatList
-          data={reviews}
+          data={reviews?.data}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
           ListEmptyComponent={<Text style={styles.tstyle10}>No Reviews!</Text>}

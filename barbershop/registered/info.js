@@ -46,7 +46,7 @@ import Reviews from "../components/reviews";
 
 import * as Animatable from "react-native-animatable";
 
-import styles, { backgroundcolor } from "../styles";
+import styles from "../styles";
 
 const CustomRatings = ({ avg_ratings }) => {
   const theme = useTheme();
@@ -77,6 +77,7 @@ class Info extends React.PureComponent {
   };
 
   componentDidMount() {
+    this.props.getReviews(this.props.route.params.props.id);
     setTimeout(() => {
       this.setState({ isReady: true });
     }, 500);
@@ -163,7 +164,6 @@ class Info extends React.PureComponent {
 
   showReviews = () => {
     this.setState({ reviewvisible: true });
-    this.props.getReviews(this.props.route.params.props.id);
   };
 
   showServices = () => {
@@ -195,7 +195,6 @@ class Info extends React.PureComponent {
       end_time,
       about,
       contact,
-      avg_ratings,
     } = this.props.route.params.props;
 
     const {
@@ -205,6 +204,7 @@ class Info extends React.PureComponent {
       removeErrors,
       reg_username,
       msdata,
+      avg_ratings,
     } = this.props;
 
     const datetime = `${date} ${time}`;
@@ -472,6 +472,7 @@ const mapStateToProps = (state) => ({
   loading: state.errorReducer.loading,
   reg_username: state.authReducer.user ? state.authReducer.user.username : null,
   msdata: state.getservicesReducer.availableservices,
+  avg_ratings: state.reviewReducer.reviews?.avg_ratings,
 });
 
 export default connect(mapStateToProps, {
