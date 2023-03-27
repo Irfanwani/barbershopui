@@ -85,8 +85,6 @@ export const MultiSelect = (props) => {
       }
     }
 
-    callback2(false);
-
     callback(selectedItems.length);
 
     if (callback3) {
@@ -112,6 +110,7 @@ export const MultiSelect = (props) => {
   };
 
   const applyFilter = () => {
+    callback2(false);
     ref.current.map((el, index) => {
       if (el.state.checked) {
         if (!selectedItems.includes(data[index])) {

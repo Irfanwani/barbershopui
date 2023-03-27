@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { FlatList, View, TextInput } from "react-native";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import {
   FAB,
   IconButton,
@@ -26,119 +26,112 @@ import styles, {
   darkbackgroundcolor,
 } from "../styles";
 
-class Index extends React.PureComponent {
-  state = {
-    searching: false,
-    query: "",
-    notification_token: "",
-    visible: false,
-    filterCount: 0,
-    clearSelection: false,
-    removeFilters: false,
-    getMoreData: false,
-    start: 10,
-    end: 20,
-    filterType: null,
-    selectedServiceFilters: null,
+const Index = ({ navigation, route }) => {
+  const { barberList, fetching, id, token, darkmode } = useSelector(
+    (state) => ({
+      barberList: state.barbersReducer.barbers,
+      fetching: state.errorReducer.fetching,
+      id: state.authReducer.user ? state.authReducer.user.id : null,
+      token: state.authReducer.token,
+      darkmode: state.themeReducer.darkmode,
+    })
+  );
+
+  const [searching, setSearching] = useState(false);
+  const [query, setQuery] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [filterCount, setFilterCount] = useState(0);
+  const [clearSelection, setClearSelection] = useState(false);
+  const [removeFilters, setRemoveFilters] = useState(false);
+  const [getMoreData, setGetMoreData] = useState(false);
+  const [start, setStart] = useState(10);
+  const [end, setEnd] = useState(20);
+  const [filterType, setFilterType] = useState(null);
+  const [selectedServiceFilters, setSelServiceFilters] = useState(null);
+
+  const dispatch = useDispatch();
+  const setSearch = () => {
+    setSearching(true);
   };
 
-  setSearch = () => {
-    this.setState({ searching: true });
+  const setsearching = () => {
+    setSearching(false);
+    setQuery("");
   };
 
-  setsearching = () => {
-    this.setState({ searching: false, query: "" });
+  const callback = (...rest) => {
+    setFilterCount(rest[0] ? rest[0] : 0);
+    setVisible(false);
   };
 
-  setQuery = (query) => {
-    this.setState({ query });
+  const callback2 = (cl) => {
+    setClearSelection(cl);
+    setRemoveFilters(true);
+    setFilterType(null);
   };
 
-  search = () => {
-    this.setState({ searching: true });
+  const callback3 = (selectedServiceFilters) => {
+    setSelServiceFilters(selectedServiceFilters);
   };
 
-  callback = (...rest) => {
-    this.setState(rest[0] ? { filterCount: rest[0] } : { filterCount: 0 });
-    this.setState({ visible: false });
+  const cbfun = (val) => {
+    setRemoveFilters(val);
+    setClearSelection(true);
   };
 
-  callback2 = (cl) => {
-    this.setState({ clearSelection: cl, removeFilters: true });
+  const cbfun2 = (ft) => {
+    setFilterType(ft == filterType ? null : ft);
   };
 
-  callback3 = (selectedServiceFilters) => {
-    this.setState({ selectedServiceFilters });
+  const refresh = () => {
+    dispatch(barbers());
+    setRemoveFilters(true);
+    setClearSelection(true);
+    setFilterType(null);
+    setSelServiceFilters(null);
   };
 
-  cbfun = (val) => {
-    this.setState({ removeFilters: val, clearSelection: true });
-  };
-
-  cbfun2 = (filterType) => {
-    this.setState({ filterType });
-  };
-
-  refresh = () => {
-    this.props.barbers();
-    this.setState({
-      removeFilters: true,
-      clearSelection: true,
-      filterType: null,
-      selectedServiceFilters: null,
-    });
-  };
-
-  reachedEnd = () => {
-    const { getMoreData, start, end, filterType, selectedServiceFilters } =
-      this.state;
+  const reachedEnd = () => {
     if (getMoreData) {
-      this.setState(
-        (prev) => ({ getMoreData: false, start: prev.end, end: prev.end + 10 }),
-        () => {
-          this.props.barbers(
-            filterType,
-            selectedServiceFilters,
-            start,
-            end,
-            FETCH_MORE
-          );
-        }
+      setGetMoreData(false);
+      setStart(end);
+      setEnd((prev) => prev + 10);
+      dispatch(
+        barbers(filterType, selectedServiceFilters, end, end + 10, FETCH_MORE)
       );
     }
   };
 
-  startScroll = () => {
-    this.setState({ getMoreData: true });
+  const startScroll = () => {
+    setGetMoreData(true);
   };
 
-  componentDidMount() {
-    this.props.navigation.setOptions({
+  useEffect(() => {
+    navigation.setOptions({
       headerTitle: "Barbershop",
       headerRight: () => (
         <View style={styles.vstyle2}>
           <IconButton
             icon="magnify"
             color={headertextcolor}
-            onPress={this.setSearch}
+            onPress={setSearch}
           />
         </View>
       ),
     });
 
-    this.props.barbers();
-    this.props.getAppointments();
+    dispatch(barbers());
+    dispatch(getAppointments());
 
-    notification_manager(this.props.id, this.props.token)
+    notification_manager(id, token)
       .then(() => {})
       .catch((err) => {
-        this.props.tokenCheck(err, GET_ERRORS);
+        dispatch(tokenCheck(err, GET_ERRORS));
       });
-  }
+  }, []);
 
-  componentDidUpdate() {
-    const { searching } = this.state;
-    this.props.navigation.setOptions({
+  useEffect(() => {
+    navigation.setOptions({
       headerTitle: searching ? "" : "Barbershop",
       headerRight: () =>
         searching ? (
@@ -146,9 +139,9 @@ class Index extends React.PureComponent {
             <IconButton
               color={headertextcolor}
               icon="arrow-left"
-              onPress={this.setsearching}
+              onPress={setsearching}
               style={{
-                backgroundColor: this.props.darkmode
+                backgroundColor: darkmode
                   ? darkbackgroundcolor
                   : backgroundcolor,
               }}
@@ -160,8 +153,8 @@ class Index extends React.PureComponent {
               autoCapitalize="none"
               returnKeyType="search"
               placeholder="Search"
-              value={this.state.query}
-              onChangeText={this.setQuery}
+              value={query}
+              onChangeText={setQuery}
             />
           </View>
         ) : (
@@ -169,20 +162,18 @@ class Index extends React.PureComponent {
             <IconButton
               icon="magnify"
               color={headertextcolor}
-              onPress={this.search}
+              onPress={setSearch}
             />
           </View>
         ),
     });
-  }
+  });
 
-  renderItem = ({ item }) => (
-    <Barber item={item} navigation={this.props.navigation} />
+  const renderItem = ({ item }) => (
+    <Barber item={item} navigation={navigation} />
   );
 
-  data = () => {
-    const { barberList } = this.props;
-    const { query } = this.state;
+  const data = useMemo(() => {
     if (query) {
       const dt =
         barberList?.length > 0
@@ -195,79 +186,64 @@ class Index extends React.PureComponent {
       return dt;
     }
     return barberList;
-  };
+  }, [query, barberList]);
 
-  render() {
-    const { fetching } = this.props;
-    const { visible, filterCount, clearSelection, removeFilters } = this.state;
-    return (
-      <View style={styles.vstyle6}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          style={styles.vstyle6}
-          refreshing={fetching}
-          onRefresh={this.refresh}
-          data={this.data()}
-          renderItem={this.renderItem}
-          keyExtractor={(item) => item.id.toString()}
-          ListEmptyComponent={
-            <Text style={styles.tstyle10}>No barber found!</Text>
-          }
-          ListHeaderComponent={
-            <HeaderComponent
-              removeFilters={removeFilters}
-              callback={this.cbfun}
-              callback2={this.cbfun2}
-            />
-          }
-          ListFooterComponent={
-            this.data()?.length != 0 &&
-            (!fetching ? (
-              <Text style={styles.tstyle11}>End Reached!</Text>
-            ) : (
-              <ActivityIndicator color="orange" style={styles.tstyle11} />
-            ))
-          }
-          onEndReached={this.reachedEnd}
-          onEndReachedThreshold={0.1}
-          onScrollBeginDrag={this.startScroll}
-        />
-
-        <View style={styles.fab2}>
-          <FAB
-            icon="filter-outline"
-            color="white"
-            style={styles.fab3}
-            onPress={() => this.setState({ visible: true })}
+  return (
+    <View style={styles.vstyle6}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        style={styles.vstyle6}
+        refreshing={fetching}
+        onRefresh={refresh}
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        ListEmptyComponent={
+          <Text style={styles.tstyle10}>No barber found!</Text>
+        }
+        ListHeaderComponent={
+          <HeaderComponent
+            removeFilters={removeFilters}
+            callback={cbfun}
+            callback2={cbfun2}
+            filterType={filterType}
           />
-          <Badge style={styles.badge}>{filterCount}</Badge>
-        </View>
-        <MultiSelect
-          title="Filter As per Services provided"
-          data={serviceList}
-          visible={visible}
-          callback={this.callback}
-          callback2={this.callback2}
-          callback3={this.callback3}
-          clearSelection={clearSelection}
-          barbersFilter={true}
-          buttonLabel="Apply Filter"
+        }
+        ListFooterComponent={
+          data?.length != 0 &&
+          (!fetching ? (
+            <Text style={styles.tstyle11}>End Reached!</Text>
+          ) : (
+            <ActivityIndicator color="orange" style={styles.tstyle11} />
+          ))
+        }
+        onEndReached={reachedEnd}
+        onEndReachedThreshold={0.1}
+        onScrollBeginDrag={startScroll}
+      />
+
+      <View style={styles.fab2}>
+        <FAB
+          icon="filter-outline"
+          color="white"
+          style={styles.fab3}
+          onPress={() => setVisible(true)}
         />
+        <Badge style={styles.badge}>{filterCount}</Badge>
       </View>
-    );
-  }
-}
+      <MultiSelect
+        title="Filter As per Services provided"
+        data={serviceList}
+        visible={visible}
+        callback={callback}
+        callback2={callback2}
+        callback3={callback3}
+        clearSelection={clearSelection}
+        barbersFilter={true}
+        buttonLabel="Apply Filter"
+      />
+    </View>
+  );
+};
 
-const mapStateToProps = (state) => ({
-  barberList: state.barbersReducer.barbers,
-  fetching: state.errorReducer.fetching,
-  id: state.authReducer.user ? state.authReducer.user.id : null,
-  token: state.authReducer.token,
-  darkmode: state.themeReducer.darkmode,
-});
-
-export default connect(mapStateToProps, {
-  barbers,
-  getAppointments,
-  tokenCheck,
-})(Index);
+export default Index;

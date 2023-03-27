@@ -11,14 +11,13 @@ import {
   HelperText,
   Title,
   Button,
-  Colors,
 } from "react-native-paper";
 
 import { useDispatch } from "react-redux";
 
 import { barbers } from "../redux/actions/actions";
 
-import styles, { backgroundcolor, styles2 } from "../styles";
+import styles, { styles2 } from "../styles";
 
 // Individual barber card
 export const Barber = memo((props) => {
@@ -81,20 +80,12 @@ export const Barber = memo((props) => {
 
 // filtering component
 export const HeaderComponent = memo((props) => {
-  const { removeFilters, callback, callback2 } = props;
-
-  const [selected, setSelected] = useState(null);
+  const { removeFilters, callback, callback2, filterType } =
+    props;
 
   const dispatch = useDispatch();
 
   const isFirstRender = useRef(true);
-
-  useEffect(() => {
-    if (removeFilters) {
-      setSelected(null);
-      return;
-    }
-  }, [removeFilters]);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -103,25 +94,20 @@ export const HeaderComponent = memo((props) => {
     }
 
     if (!removeFilters) {
-      dispatch(barbers(selected));
+      dispatch(barbers(filterType));
     }
-  }, [selected]);
+  }, [filterType]);
 
   const select = (type) => {
     callback(false);
     callback2(type);
-    if (selected !== type) {
-      setSelected(type);
-    } else {
-      setSelected(null);
-    }
   };
 
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <Button
         icon="content-cut"
-        mode={selected == "barbershop" ? "contained" : "outlined"}
+        mode={filterType == "barbershop" ? "contained" : "outlined"}
         style={styles2.filterstyles}
         onPress={() => select("barbershop")}
       >
@@ -129,7 +115,7 @@ export const HeaderComponent = memo((props) => {
       </Button>
       <Button
         icon="hair-dryer-outline"
-        mode={selected == "hair_salon" ? "contained" : "outlined"}
+        mode={filterType == "hair_salon" ? "contained" : "outlined"}
         style={styles2.filterstyles}
         onPress={() => select("hair_salon")}
       >
@@ -137,7 +123,7 @@ export const HeaderComponent = memo((props) => {
       </Button>
       <Button
         icon="chair-rolling"
-        mode={selected == "beauty_salon" ? "contained" : "outlined"}
+        mode={filterType == "beauty_salon" ? "contained" : "outlined"}
         style={styles2.filterstyles}
         onPress={() => select("beauty_salon")}
       >
@@ -145,7 +131,7 @@ export const HeaderComponent = memo((props) => {
       </Button>
       <Button
         icon="store"
-        mode={selected == "full_service_salon" ? "contained" : "outlined"}
+        mode={filterType == "full_service_salon" ? "contained" : "outlined"}
         style={styles2.filterstyles}
         onPress={() => select("full_service_salon")}
       >
@@ -153,7 +139,7 @@ export const HeaderComponent = memo((props) => {
       </Button>
       <Button
         icon="magnify"
-        mode={selected == "other" ? "contained" : "outlined"}
+        mode={filterType == "other" ? "contained" : "outlined"}
         style={styles2.filterstyles}
         onPress={() => select("other")}
       >
