@@ -454,7 +454,7 @@ class Info extends React.PureComponent {
             </Card>
           </RBSheet>
 
-          <Reviews visible={reviewvisible} callback={this.closeReview} />
+          <Reviews visible={reviewvisible} callback={this.closeReview} id={this.props.route.params.props.id} />
         </View>
       );
     }

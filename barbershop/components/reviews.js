@@ -15,7 +15,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 import { Rating } from "react-native-ratings";
-import { delReview } from "../redux/actions/actions2";
+import { delReview, getReviews } from "../redux/actions/actions2";
 import { baseUrl } from "../redux/actions/actions";
 
 const Reviews = (props) => {
@@ -24,7 +24,7 @@ const Reviews = (props) => {
     username: state.authReducer.user?.username,
   }));
 
-  const { visible, callback } = props;
+  const { visible, callback, id } = props;
   const theme = useTheme();
 
   const isFirstRender = useRef(true);
@@ -42,7 +42,15 @@ const Reviews = (props) => {
     dispatch(delReview(id, callback));
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }) => <RenderItem item={item} />;
+
+  const RenderItem = ({ item }) => {
+    const dispatch = useDispatch();
+
+    const deleteItem = () => {
+      deleteReview(item.id);
+      dispatch(getReviews(id));
+    };
     return (
       <Surface style={styles.sustyle}>
         <View style={styles.vstyle2}>
@@ -54,9 +62,7 @@ const Reviews = (props) => {
             <IconButton
               icon="delete"
               color={Colors.red500}
-              onPress={() => {
-                deleteReview(item.id);
-              }}
+              onPress={deleteItem}
             />
           )}
         </View>
