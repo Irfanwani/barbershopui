@@ -6053,6 +6053,11 @@ react-native-razorpay@^2.3.0:
   resolved "https://registry.yarnpkg.com/react-native-razorpay/-/react-native-razorpay-2.3.0.tgz#e89f3c635e439bc85e4c7972eb2d67e2c0e0abc3"
   integrity sha512-xxiZCPuZmiRq5UHDr+D4OoyxEjMu0ujC+RaE+rYo938EK0Vc21dZRUVxMVP1L2WgzA8PYwmD5FWvdHNtWLQC4Q==
 
+react-native-reanimated-image-viewer@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated-image-viewer/-/react-native-reanimated-image-viewer-1.0.2.tgz#05b6e6e1a4dc5dff8c3dae25f2f5f634088aa84c"
+  integrity sha512-XLWwmzzHy2gD+IA7AC5wBqs+gmyl/i7dEGkuHOkMjczcJFlQqVe9sHM44ZlrRsTf2+5X9+wxavQb/2H+ezrLiw==
+
 react-native-reanimated@~2.12.0:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.12.0.tgz#5821eecfb1769b1617a67a2d4dec12fdeedb2b6e"

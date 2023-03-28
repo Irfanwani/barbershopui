@@ -10,6 +10,10 @@ const statusbarheight = Constants.statusBarHeight + 5;
 
 const styles = StyleSheet.create({
   movebutton: { alignSelf: "center" },
+  eye: {
+    position: 'absolute',
+    right: 10,
+  },
   sharetouch: {
     paddingVertical: 15,
     paddingHorizontal: 30,

@@ -8,7 +8,7 @@ import { styles2 } from "../../styles";
 import Constants from "expo-constants";
 import { CustomAlert } from "../../components/customalert";
 
-export const baseUrl =
+export const baseUrl = 'http://192.168.164.13:8000';
   process.env.NODE_ENV == "development"
     ? Constants.expoConfig.extra.BASE_URL
     : Constants.expoConfig.extra.BASE_URL_PROD;

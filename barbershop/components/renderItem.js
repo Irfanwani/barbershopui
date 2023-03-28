@@ -1,13 +1,11 @@
 import React, { memo, useState, useEffect, useRef } from "react";
-import { View, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 
 import {
   Text,
   Card,
   Avatar,
   Divider,
-  Modal,
-  Portal,
   HelperText,
   Title,
   Button,
@@ -18,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { barbers } from "../redux/actions/actions";
 
 import styles, { styles2 } from "../styles";
+import { CustomImageViewer } from "./imageviewer";
 
 // Individual barber card
 export const Barber = memo((props) => {
@@ -55,15 +54,11 @@ export const Barber = memo((props) => {
           />
         )}
 
-        <Portal>
-          <Modal visible={visible} onDismiss={closeModal}>
-            <Image
-              resizeMode="contain"
-              source={{ uri: props.item.image }}
-              style={styles.istyle2}
-            />
-          </Modal>
-        </Portal>
+        <CustomImageViewer
+          closeModal={closeModal}
+          visible={visible}
+          imageUrl={props.item.image}
+        />
 
         <TouchableOpacity onPress={gotoInfo} style={styles.tostyle}>
           <Title style={styles.text1}>{props.item.username}</Title>
@@ -80,8 +75,7 @@ export const Barber = memo((props) => {
 
 // filtering component
 export const HeaderComponent = memo((props) => {
-  const { removeFilters, callback, callback2, filterType } =
-    props;
+  const { removeFilters, callback, callback2, filterType } = props;
 
   const dispatch = useDispatch();
 

@@ -7,9 +7,10 @@ import {
   Colors,
   Card,
   FAB,
+  IconButton,
 } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
-import styles, { backgroundcolor } from "../styles";
+import styles, { backgroundcolor, darkbackgroundcolor } from "../styles";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { updateDetails } from "../redux/actions/actions";
@@ -18,6 +19,7 @@ import * as Location from "expo-location";
 
 import MapView, { Marker } from "react-native-maps";
 import { cameraImageAsync, galleryImageAsync } from "../utils/getassets";
+import { CustomImageViewer } from "../components/imageviewer";
 
 const App = () => {
   const { loading, details, username, email } = useSelector((state) => ({
@@ -48,6 +50,16 @@ const App = () => {
 
   const [standard, setStandard] = useState(true);
   const [mapClicked, setMapClicked] = useState(false);
+
+  const [visible, setVisible] = useState(false);
+
+  const showImage = () => {
+    setVisible(true);
+  };
+
+  const closeModal = () => {
+    setVisible(false);
+  };
 
   const ImageRBSheet = useRef();
 
@@ -227,6 +239,20 @@ const App = () => {
             title="Change Profile photo"
             titleStyle={styles.ctstyle}
           />
+          <IconButton
+            size={30}
+            onPress={showImage}
+            style={styles.eye}
+            icon="eye"
+            color={darkbackgroundcolor}
+          />
+
+          <CustomImageViewer
+            closeModal={closeModal}
+            visible={visible}
+            imageUrl={image}
+          />
+
           <Card.Content style={styles.ccstyle}>
             <FAB onPress={galleryAsync} icon="image" style={styles.fstyle1} />
             <FAB onPress={cameraAsync} icon="camera" style={styles.fstyle2} />
