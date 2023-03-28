@@ -159,9 +159,6 @@ export const addReview =
 
 // get reviews of a barber
 export const getReviews = (id) => (dispatch, getState) => {
-  dispatch({
-    type: actions.LOADING,
-  });
   const config = setConfig(getState);
 
   axios
