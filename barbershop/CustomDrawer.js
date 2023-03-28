@@ -15,7 +15,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import styles, { backgroundcolor, headertextcolor } from "./styles";
+import styles, { headertextcolor } from "./styles";
 
 import { useSelector, useDispatch } from "react-redux";
 import { CHANGE_THEME } from "./redux/actions/types";
@@ -92,8 +92,10 @@ const CustomDrawer = (props) => {
         <DrawerItemList {...props} />
 
         <TouchableOpacity onPress={shareApp} style={styles.sharetouch}>
-          <Icon name="share" size={20} color={backgroundcolor} />
-          <Title style={styles.sharetitle}>Share</Title>
+          <Icon name="share" size={20} color={theme.colors.primary} />
+          <Title style={[styles.sharetitle, { color: theme.colors.primary }]}>
+            Share
+          </Title>
         </TouchableOpacity>
 
         <View style={styles.vstyle}>

@@ -9,6 +9,7 @@ import {
   HelperText,
   Title,
   Button,
+  useTheme,
 } from "react-native-paper";
 
 import { useDispatch } from "react-redux";
@@ -33,6 +34,8 @@ export const Barber = memo((props) => {
   const closeModal = () => {
     setVisible(false);
   };
+
+  const theme = useTheme();
 
   return (
     <Card>
@@ -61,7 +64,9 @@ export const Barber = memo((props) => {
         />
 
         <TouchableOpacity onPress={gotoInfo} style={styles.tostyle}>
-          <Title style={styles.text1}>{props.item.username}</Title>
+          <Title style={{ color: theme.colors.primary }}>
+            {props.item.username}
+          </Title>
           <Text numberOfLines={1} ellipsizeMode="tail">
             Address:- {props.item.location}
           </Text>

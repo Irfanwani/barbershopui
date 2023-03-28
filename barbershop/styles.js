@@ -3,6 +3,7 @@ import { Colors } from "react-native-paper";
 import Constants from "expo-constants";
 
 export const backgroundcolor = Colors.blueGrey500;
+export const darkprimary = Colors.blueGrey200;
 export const headertextcolor = "white";
 export const darkbackgroundcolor = Colors.blueGrey900;
 
@@ -11,7 +12,7 @@ const statusbarheight = Constants.statusBarHeight + 5;
 const styles = StyleSheet.create({
   movebutton: { alignSelf: "center" },
   eye: {
-    position: 'absolute',
+    position: "absolute",
     right: 10,
   },
   sharetouch: {
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  sharetitle: { color: backgroundcolor, fontSize: 15, paddingHorizontal: 20 },
+  sharetitle: { fontSize: 15, paddingHorizontal: 20 },
   view: {
     justifyContent: "center",
     marginHorizontal: 10,
@@ -356,8 +357,6 @@ const styles = StyleSheet.create({
   },
 
   tostyle: { justifyContent: "center", flexShrink: 1 },
-
-  text1: { color: backgroundcolor },
 
   view3: { flex: 1, paddingTop: 20 },
 

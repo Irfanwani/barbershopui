@@ -8,9 +8,10 @@ import {
   Card,
   FAB,
   IconButton,
+  useTheme,
 } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
-import styles, { backgroundcolor, darkbackgroundcolor } from "../styles";
+import styles, { darkbackgroundcolor } from "../styles";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { updateDetails } from "../redux/actions/actions";
@@ -211,6 +212,8 @@ const App = () => {
     MapRBSheet.current.close();
   };
 
+  const theme = useTheme();
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -273,7 +276,7 @@ const App = () => {
         right={
           <TextInput.Icon
             name="pencil"
-            color={backgroundcolor}
+            color={theme.colors.primary}
             onPress={openLRBS}
             forceTextInputFocus={false}
           />
@@ -358,7 +361,7 @@ const App = () => {
         label="About"
         mode="outlined"
         left={<TextInput.Icon name="information" />}
-        right={<TextInput.Icon name="pencil" color={backgroundcolor} />}
+        right={<TextInput.Icon name="pencil" color={theme.colors.primary} />}
         value={about}
         onChangeText={setAbout}
       />
@@ -367,7 +370,7 @@ const App = () => {
         maxLength={40}
         mode="outlined"
         left={<TextInput.Icon name="card-account-phone" />}
-        right={<TextInput.Icon name="pencil" color={backgroundcolor} />}
+        right={<TextInput.Icon name="pencil" color={theme.colors.primary} />}
         value={contact}
         onChangeText={setContact}
       />

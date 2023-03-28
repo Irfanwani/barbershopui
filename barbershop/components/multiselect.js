@@ -102,7 +102,7 @@ export const MultiSelect = (props) => {
         ref={(rf) => (ref.current[index] = rf)}
         style={{ marginLeft: 5 }}
         iconStyle={{ borderRadius: 4 }}
-        fillColor={backgroundcolor}
+        fillColor={theme.colors.primary}
         textComponent={<TextComponent item={item} />}
         isChecked={selectedItems.includes(item)}
       />

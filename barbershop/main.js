@@ -55,6 +55,7 @@ import { authenticate } from "./redux/actions/actions";
 import styles, {
   backgroundcolor,
   darkbackgroundcolor,
+  darkprimary,
   headertextcolor,
   styles2,
 } from "./styles";
@@ -90,8 +91,8 @@ const CustomDarkTheme = {
     background: "#222223",
     text: "#ffffff",
     bgcolor: darkbackgroundcolor,
-    primary: backgroundcolor,
-    accent: backgroundcolor,
+    primary: darkprimary,
+    accent: darkprimary,
   },
 };
 
@@ -128,7 +129,7 @@ const DrawerScreens = (props) => {
         drawerType: "slide",
         drawerActiveBackgroundColor: backgroundcolor,
         drawerActiveTintColor: headertextcolor,
-        drawerInactiveTintColor: backgroundcolor,
+        drawerInactiveTintColor: theme.colors.primary,
         headerStyle: { backgroundColor: theme.colors.bgcolor },
         headerTintColor: headertextcolor,
         swipeEdgeWidth: width / 4,
@@ -153,7 +154,7 @@ const DrawerScreens = (props) => {
           ),
           drawerLabel: ({ color }) => (
             <View style={styles.dlstyle}>
-              <Text style={{ color }}>Appointments</Text>
+              <Text style={{ color, fontWeight: "700" }}>Appointments</Text>
               <Badge style={styles.bastyle}>{appointments?.length ?? 0}</Badge>
             </View>
           ),
