@@ -25,6 +25,12 @@ export default {
       BASE_URL_PROD: process.env.BASE_URL_PROD,
       PUSH_NOTIFICATION_URL: process.env.PUSH_NOTIFICATION_URL,
     },
+
+    updates: {
+      url: "https://u.expo.dev/728d160a-064d-463c-8eca-c81df30dc772",
+    },
+    runtimeVersion: "1.0.0",
+
     android: {
       googleServicesFile:
         process.env.GOOGLE_SERVICES ?? "./android/app/google-services.json",

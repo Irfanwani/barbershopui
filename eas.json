@@ -4,6 +4,7 @@
   },
   "build": {
     "development": {
+      "channel": "development",
       "distribution": "internal",
       "android": {
         "developmentClient": true,
@@ -15,9 +16,12 @@
       }
     },
     "preview": {
+      "channel": "preview",
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "channel": "production"
+    }
   },
   "submit": {
     "production": {}
