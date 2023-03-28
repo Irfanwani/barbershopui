@@ -97,6 +97,7 @@ class Register extends React.Component {
             />
             <View style={styles.vstyle1}>
               <TextInput
+                maxLength={25}
                 mode="outlined"
                 value={username}
                 onChangeText={this.changeUsername}

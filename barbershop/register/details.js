@@ -259,7 +259,7 @@ class Details extends React.Component {
                   left={<TextInput.Icon name="map-marker" />}
                   right={
                     <TextInput.Icon
-                      color={animating ? "grey" : "black"}
+                      color={animating ? "grey" : backgroundcolor}
                       name={animating ? "dots-horizontal" : "crosshairs-gps"}
                       onPress={!animating ? this.getLocationAsync : null}
                     />
