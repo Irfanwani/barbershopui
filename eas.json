@@ -7,7 +7,6 @@
       "channel": "development",
       "distribution": "internal",
       "android": {
-        "developmentClient": true,
         "gradleCommand": ":app:assembleRelease",
         "buildType": "apk"
       },
