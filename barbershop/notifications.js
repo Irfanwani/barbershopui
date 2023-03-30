@@ -4,13 +4,13 @@ import axios from "axios";
 
 import { baseUrl } from "./redux/actions/actions";
 
-const BASE_URL = baseUrl+'/api/haircut';
+const BASE_URL = baseUrl + "/api/haircut";
 
 export const notification_manager = async (id, authToken) => {
   let { status } = await Notifications.requestPermissionsAsync();
   if (status !== "granted") {
     alert(
-      "Please provide the notification permissions to get notified whenever a new appointment is fixed with you. You can turn off notifications anytime!"
+      "Please provide the notification permissions to get notified whenever about your appointments. You can turn off notifications anytime!"
     );
     let { status } = await Notifications.requestPermissionsAsync();
     if (status !== "granted") {
@@ -18,7 +18,7 @@ export const notification_manager = async (id, authToken) => {
     }
   }
 
-  let token = (await Notifications.getExpoPushTokenAsync()).data;
+  let token = (await Notifications.getExpoPushTokenAsync({experienceId: '@irfanwani/barbershop'})).data;
 
   const config = {
     headers: {

@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1072778901152",
+    "project_id": "barbershop-e5640",
+    "storage_bucket": "barbershop-e5640.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072778901152:android:124a5fadd6706bfbddbbc5",
+        "android_client_info": {
+          "package_name": "com.barbershop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072778901152-rb7d4nb7eonqt64t76fa909ki8c92fd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXqRaZ045_eLUUI0HrFaUBZUSDaNHeaVA"
+        },
+        {
+          "current_key": "AIzaSyD6HVgOG5sV9o_mN2eT3m72Hc7Iowah2Xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072778901152-rb7d4nb7eonqt64t76fa909ki8c92fd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072778901152:android:b471b753b519340fddbbc5",
+        "android_client_info": {
+          "package_name": "com.servicebarbershop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072778901152-rs8irjpv633gqinl8d1fnlv7r7mul9pl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.servicebarbershop",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1072778901152-rb7d4nb7eonqt64t76fa909ki8c92fd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXqRaZ045_eLUUI0HrFaUBZUSDaNHeaVA"
+        },
+        {
+          "current_key": "AIzaSyD6HVgOG5sV9o_mN2eT3m72Hc7Iowah2Xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072778901152-rb7d4nb7eonqt64t76fa909ki8c92fd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
