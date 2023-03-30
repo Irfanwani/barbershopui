@@ -111,7 +111,7 @@ export const getAppointments =
         });
       })
       .catch((err) => {
-        if (err.response.status == 404) {
+        if (err?.response?.status == 404) {
           setEndReached(true);
           dispatch({ type: actions.GET_ERRORS });
           return;

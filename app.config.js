@@ -12,6 +12,7 @@ export default {
       ],
     ],
     name: "Barbershop",
+    jsEngine: "hermes",
     displayName: "Barbershop",
     slug: "barbershop",
     version: "1.0.0",
