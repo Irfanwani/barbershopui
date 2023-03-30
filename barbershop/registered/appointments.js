@@ -1,10 +1,9 @@
-import React, { useRef, useState } from "react";
-import { View, FlatList } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import {
   Text,
   Colors,
   Divider,
-  Card,
   IconButton,
   Button,
   Title,
@@ -15,7 +14,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments, removeAppointment } from "../redux/actions/actions2";
 
-import styles, { backgroundcolor, styles2 } from "../styles";
+import styles, { styles2 } from "../styles";
 
 import AlertPro from "react-native-alert-pro";
 
@@ -36,12 +35,36 @@ const Appointments = () => {
   const [id, setId] = useState(null);
   const [barber, setBarber] = useState(null);
 
+  const [page_no, setPageNo] = useState(1);
+  const [scroll, setScroll] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [endReached, setEndReached] = useState(false);
+
   const dispatch = useDispatch();
   const alertprocomp = useRef([]);
   const alertprodel = useRef([]);
 
   const refreshPage = () => {
-    dispatch(getAppointments());
+    setPageNo(1);
+    setEndReached(false);
+    dispatch(getAppointments(1));
+  };
+
+  useEffect(() => {
+    if (!fetching) setLoading(false);
+  }, [fetching]);
+
+  const loadMoreData = () => {
+    if (scroll && !endReached) {
+      setLoading(true);
+      setPageNo((prev) => prev + 1);
+      dispatch(getAppointments(page_no + 1, setEndReached));
+    }
+    setScroll(false);
+  };
+
+  const changeScroll = () => {
+    setScroll(true);
   };
 
   const closealertcomp = (id) => {
@@ -193,34 +216,36 @@ const Appointments = () => {
     return <Text style={styles.tstyle8}>No appointment fixed!</Text>;
   };
 
-  const renderSectionHeader = (section) => {
-    return (
-      <Card style={styles.cstyle5}>
-        <Text style={styles.tstyle9}>{section.title.toUpperCase()}</Text>
-      </Card>
+  const ListFooter = () =>
+    loading ? (
+      <ActivityIndicator />
+    ) : (
+      <Text style={styles.footer}>{endReached ? "End Reached!" : ""}</Text>
     );
-  };
-
-  const ListFooter = () => <View style={{ padding: 20 }}></View>;
 
   return (
     <View style={styles.vstyle6}>
       <FlatList
+        onScrollBeginDrag={changeScroll}
+        showsVerticalScrollIndicator={false}
         data={appointments}
         renderItem={renderAppointment}
         ListEmptyComponent={ListEmptyComponent}
-        refreshing={fetching}
+        refreshing={fetching && !loading}
         onRefresh={refreshPage}
         ListFooterComponent={ListFooter}
+        onEndReached={loadMoreData}
       />
 
-      <Ratings
-        visible={visible}
-        id={id}
-        barber={barber}
-        callback={callback}
-        callback2={callback2}
-      />
+      {visible ? (
+        <Ratings
+          visible={visible}
+          id={id}
+          barber={barber}
+          callback={callback}
+          callback2={callback2}
+        />
+      ) : null}
     </View>
   );
 };

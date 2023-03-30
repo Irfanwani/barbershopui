@@ -91,25 +91,35 @@ export const fixAppointment =
   };
 
 // Getting appointments
-export const getAppointments = () => (dispatch, getState) => {
-  dispatch({
-    type: actions.FETCHING,
-  });
-  const config = setConfig(getState);
-
-  axios
-    .get(BASE_URL + "/appointments", config)
-    .then((res) => {
-      dispatch({
-        type: actions.GET_APPOINTMENTS,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      let check = tokenCheck(err, actions.GET_APPOINTMENTS_FAIL);
-      dispatch(check);
+export const getAppointments =
+  (page_no, setEndReached = () => {}) =>
+  (dispatch, getState) => {
+    dispatch({
+      type: actions.FETCHING,
     });
-};
+    const config = setConfig(getState);
+
+    axios
+      .get(BASE_URL + `/appointments?page_no=${page_no}`, config)
+      .then((res) => {
+        dispatch({
+          type:
+            page_no == 1
+              ? actions.GET_APPOINTMENTS
+              : actions.UPDATE_APPOINTMENTS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status == 404) {
+          setEndReached(true);
+          dispatch({ type: actions.GET_ERRORS });
+          return;
+        }
+        let check = tokenCheck(err, actions.GET_APPOINTMENTS_FAIL);
+        dispatch(check);
+      });
+  };
 
 // Completing/deleting appointment
 export const removeAppointment =

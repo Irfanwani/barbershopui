@@ -43,7 +43,7 @@ export const checkout =
             axios
               .put(BASE_URL + "/createorder", dt, config)
               .then(() => {
-                dispatch(getAppointments());
+                dispatch(getAppointments(1));
 
                 showMessage({
                   message: "Payment Done!",

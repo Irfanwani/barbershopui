@@ -121,7 +121,7 @@ const Index = ({ navigation, route }) => {
     });
 
     dispatch(barbers());
-    dispatch(getAppointments());
+    dispatch(getAppointments(1));
 
     notification_manager(id, token)
       .then(() => {})

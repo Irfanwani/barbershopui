@@ -11,6 +11,11 @@ const statusbarheight = Constants.statusBarHeight + 5;
 
 const styles = StyleSheet.create({
   movebutton: { alignSelf: "center" },
+  footer: {
+    padding: 10,
+    color: 'grey',
+    textAlign: 'center'
+  },
   eye: {
     position: "absolute",
     right: 10,

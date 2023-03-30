@@ -109,7 +109,7 @@ class Info extends React.PureComponent {
   seeAppointments = () => {
     this.Fix.close();
     this.setState({ date: "", time: "" });
-    this.props.getAppointments();
+    this.props.getAppointments(1);
     this.props.navigation.navigate("Appointments");
   };
 
