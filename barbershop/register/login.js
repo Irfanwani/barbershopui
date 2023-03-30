@@ -57,7 +57,7 @@ const Login = ({ navigation }) => {
       style={styles.sstyle}
       showsVerticalScrollIndicator={false}
     >
-      {/* <Animatable.View
+      <Animatable.View
         useNativeDriver={true}
         animation="bounceIn"
         style={styles.astyle2}
@@ -67,7 +67,7 @@ const Login = ({ navigation }) => {
           source={require("../../assets/icon.png")}
           size={150}
         />
-      </Animatable.View> */}
+      </Animatable.View>
 
       <Animatable.View useNativeDriver={true} animation="fadeInUpBig">
         <Card elevation={0} style={styles.card}>
