@@ -15,7 +15,7 @@ export default {
     jsEngine: "hermes",
     displayName: "Barbershop",
     slug: "barbershop",
-    version: "1.0.0",
+    version: "1.0.1",
     assetBundlePatterns: ["**/*"],
     extra: {
       eas: {
