@@ -1,5 +1,4 @@
 import * as Animatable from "react-native-animatable";
-import { useRef, useEffect } from "react";
 import { FlatList, View } from "react-native";
 import styles, { styles2 } from "../styles";
 import {
@@ -57,13 +56,19 @@ const Reviews = (props) => {
             />
           )}
         </View>
-        <Rating
-          imageSize={15}
-          style={styles2.rstyle}
-          tintColor={theme.dark ? "rgb(39, 39, 39)" : theme.colors.surface}
-          readonly={true}
-          startingValue={item.ratings}
-        />
+
+        <View style={styles.vstyle2}>
+          <Rating
+            imageSize={15}
+            style={styles2.rstyle}
+            tintColor={theme.dark ? "rgb(39, 39, 39)" : theme.colors.surface}
+            readonly={true}
+            startingValue={item.ratings}
+          />
+
+          <HelperText type='info' padding="none">{item.date}</HelperText>
+        </View>
+
         <HelperText numberOfLines={8} ellipsizeMode="tail">
           {item.comments ? item.comments : "No Comments!"}
         </HelperText>
