@@ -27,15 +27,6 @@ const Reviews = (props) => {
   const { visible, callback, id } = props;
   const theme = useTheme();
 
-  const isFirstRender = useRef(true);
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-  }, []);
-
   const dispatch = useDispatch();
 
   const deleteReview = (id) => {
@@ -69,7 +60,7 @@ const Reviews = (props) => {
         <Rating
           imageSize={15}
           style={styles2.rstyle}
-          tintColor={theme.colors.surface}
+          tintColor={theme.dark ? "rgb(39, 39, 39)" : theme.colors.surface}
           readonly={true}
           startingValue={item.ratings}
         />
@@ -80,28 +71,26 @@ const Reviews = (props) => {
     );
   };
 
-  if (!isFirstRender.current) {
-    return (
-      <Animatable.View
-        useNativeDriver={true}
-        duration={500}
-        animation={visible ? "bounceInUp" : "bounceOutLeft"}
-        style={[styles2.Astyle, { backgroundColor: theme.colors.background }]}
-      >
-        <IconButton icon="close" style={styles2.ibstyle} onPress={callback} />
+  if (!visible) return <></>;
 
-        <FlatList
-          data={reviews?.data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-          ListEmptyComponent={<Text style={styles.tstyle10}>No Reviews!</Text>}
-          showsVerticalScrollIndicator={false}
-        />
-      </Animatable.View>
-    );
-  }
+  return (
+    <Animatable.View
+      useNativeDriver={true}
+      duration={500}
+      animation={"bounceInUp"}
+      style={[styles2.Astyle, { backgroundColor: theme.colors.background }]}
+    >
+      <IconButton icon="close" style={styles2.ibstyle} onPress={callback} />
 
-  return null;
+      <FlatList
+        data={reviews?.data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        ListEmptyComponent={<Text style={styles.tstyle10}>No Reviews!</Text>}
+        showsVerticalScrollIndicator={false}
+      />
+    </Animatable.View>
+  );
 };
 
 export default Reviews;

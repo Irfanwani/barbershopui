@@ -54,11 +54,13 @@ const Ratings = (props) => {
     return null;
   }
 
+  if (!visible) return <></>;
+
   return (
     <Animatable.View
       useNativeDriver={true}
       duration={500}
-      animation={visible ? "bounceInDown" : "bounceOutDown"}
+      animation={"bounceInDown"}
       style={[styles2.Astyle, { backgroundColor: theme.colors.background }]}
     >
       <IconButton icon="close" onPress={close} style={styles2.ibstyle} />

@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
   movebutton: { alignSelf: "center" },
   footer: {
     padding: 10,
-    color: 'grey',
-    textAlign: 'center'
+    color: "grey",
+    textAlign: "center",
   },
   eye: {
     position: "absolute",
@@ -500,5 +500,5 @@ export const styles2 = StyleSheet.create({
 
   ibstyle: { alignSelf: "flex-end" },
 
-  rstyle: { alignSelf: "flex-start" },
+  rstyle: { alignSelf: "flex-start", marginTop: 10 },
 });

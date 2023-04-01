@@ -454,13 +454,11 @@ class Info extends React.PureComponent {
             </Card>
           </RBSheet>
 
-          {reviewvisible ? (
             <Reviews
               visible={reviewvisible}
               callback={this.closeReview}
               id={this.props.route.params.props.id}
             />
-          ) : null}
         </View>
       );
     }

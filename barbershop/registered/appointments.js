@@ -237,15 +237,13 @@ const Appointments = () => {
         onEndReached={loadMoreData}
       />
 
-      {visible ? (
-        <Ratings
-          visible={visible}
-          id={id}
-          barber={barber}
-          callback={callback}
-          callback2={callback2}
-        />
-      ) : null}
+      <Ratings
+        visible={visible}
+        id={id}
+        barber={barber}
+        callback={callback}
+        callback2={callback2}
+      />
     </View>
   );
 };
