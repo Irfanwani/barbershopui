@@ -15,7 +15,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Rating } from "react-native-ratings";
 import { delReview, getReviews } from "../redux/actions/actions2";
-import { baseUrl } from "../redux/actions/actions";
 
 const Reviews = (props) => {
   const { reviews, username } = useSelector((state) => ({
@@ -45,7 +44,7 @@ const Reviews = (props) => {
       <Surface style={styles.sustyle}>
         <View style={styles.vstyle2}>
           <View style={styles.vstyle2}>
-            <Avatar.Image size={40} source={{ uri: baseUrl + item.dp }} />
+            <Avatar.Image size={40} source={{ uri: item.dp }} />
             <Title style={styles.bstyle}>{item.user}</Title>
           </View>
           {item.user == username && (
@@ -66,7 +65,9 @@ const Reviews = (props) => {
             startingValue={item.ratings}
           />
 
-          <HelperText type='info' padding="none">{item.date}</HelperText>
+          <HelperText type="info" padding="none">
+            {item.date}
+          </HelperText>
         </View>
 
         <HelperText numberOfLines={8} ellipsizeMode="tail">
