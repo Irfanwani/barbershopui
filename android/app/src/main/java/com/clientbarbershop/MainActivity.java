@@ -1,4 +1,4 @@
-package com.barbershop;
+package com.clientbarbershop;
 
 import android.os.Build;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.barbershop.newarchitecture.components;
+package com.clientbarbershop.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

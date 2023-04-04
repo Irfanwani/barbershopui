@@ -33,7 +33,7 @@ export default {
     runtimeVersion: "1.0.0",
 
     android: {
-      package: "com.barbershop",
+      package: "com.clientbarbershop",
       googleServicesFile:
         process.env.GOOGLE_SERVICES ?? "./android/app/google-services.json",
     },

@@ -1,4 +1,4 @@
-package com.barbershop.newarchitecture;
+package com.clientbarbershop.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.barbershop.BuildConfig;
-import com.barbershop.newarchitecture.components.MainComponentsRegistry;
-import com.barbershop.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.clientbarbershop.BuildConfig;
+import com.clientbarbershop.newarchitecture.components.MainComponentsRegistry;
+import com.clientbarbershop.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

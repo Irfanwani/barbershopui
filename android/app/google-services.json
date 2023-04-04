@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1072778901152:android:124a5fadd6706bfbddbbc5",
+        "mobilesdk_app_id": "1:1072778901152:android:d2475f46cafe3eb6ddbbc5",
         "android_client_info": {
-          "package_name": "com.barbershop"
+          "package_name": "com.clientbarbershop"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1072778901152-157b9p8t0356no4o7n2ngbognn10cjaa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clientbarbershop",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
         {
           "client_id": "1072778901152-rb7d4nb7eonqt64t76fa909ki8c92fd9.apps.googleusercontent.com",
           "client_type": 3
@@ -20,7 +28,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCXqRaZ045_eLUUI0HrFaUBZUSDaNHeaVA"
+          "current_key": "AIzaSyAoR5DHieALXCxjCvdlGRZaSiFdosCSdeU"
         },
         {
           "current_key": "AIzaSyD6HVgOG5sV9o_mN2eT3m72Hc7Iowah2Xk"
@@ -60,7 +68,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCXqRaZ045_eLUUI0HrFaUBZUSDaNHeaVA"
+          "current_key": "AIzaSyAoR5DHieALXCxjCvdlGRZaSiFdosCSdeU"
         },
         {
           "current_key": "AIzaSyD6HVgOG5sV9o_mN2eT3m72Hc7Iowah2Xk"
